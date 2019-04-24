@@ -1,0 +1,24 @@
+{
+    "name": "zafranf/fnfw",
+    "description": "(fn)FW | functional Framework - Simple framework for simple project",
+    "type": "project",
+    "require": {
+        "zafranf/fnfwcore": "dev-dev"
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "zafranf",
+        "email": "zafran@fadilah.id"
+    }],
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('configuration-example.php', 'configuration.php');\""
+        ],
+        "post-create-project-cmd": [
+            "chmod -R 777 storage/"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

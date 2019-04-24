@@ -1,0 +1,5 @@
+/vendor
+composer.lock
+configuration.php
+error_log
+.DS_Store
