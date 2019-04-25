@@ -9,7 +9,7 @@ $config['app']['key'] = 'fnfw_4ppk3y';
 $config['app']['debug'] = true;
 
 /* Set Database Config */
-$config['db']['host'] = 'localhost';
-$config['db']['username'] = 'root';
-$config['db']['password'] = '';
-$config['db']['dbname'] = 'db_fnfw';
+$config['database']['host'] = 'localhost';
+$config['database']['username'] = 'root';
+$config['database']['password'] = '';
+$config['database']['dbname'] = 'db_fnfw';

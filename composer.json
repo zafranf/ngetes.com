@@ -3,7 +3,9 @@
     "description": "(fn)FW | functional Framework - Simple framework for simple project",
     "type": "project",
     "require": {
-        "zafranf/fnfwcore": "dev-dev"
+        "zafranf/fnfwcore": "dev-dev",
+        "guzzlehttp/guzzle": "^6.3",
+        "rakit/validation": "^1.1"
     },
     "license": "MIT",
     "authors": [{

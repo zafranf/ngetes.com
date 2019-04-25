@@ -42,6 +42,10 @@ small {
     font-size: small;
 }
 
+pre {
+    white-space: pre-line!important;
+}
+
 
 /* CSS from http://embedresponsively.com */
 
