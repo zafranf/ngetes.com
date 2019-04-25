@@ -7,6 +7,8 @@ $valid = validation([
         'name' => 'required',
         'email' => 'required|email',
         'message' => 'required|min:15',
+        'phone' => 'numeric',
+        'website' => 'url',
         'g-recaptcha-response' => 'required',
     ],
     'redirect' => url('/#krisan'),
@@ -22,8 +24,12 @@ $save = db()->table('contacts')->insert([
     'name' => _post('name'),
     'email' => _post('email'),
     'message' => _post('message'),
-    'accept' => bool(_post('thankyou')),
+    'phone' => _post('phone'),
+    'website' => _post('website'),
+    'thankyou' => bool(_post('thankyou')),
+    'created_at' => date('Y-m-d H:i:s'),
+    'updated_at' => date('Y-m-d H:i:s'),
 ]);
 
-setFlashMessage('Siap, krisan akan segera dibaca nanti. Kalo sempet!', 'success');
+setFlashMessage('Ntaps! Nanti dibaca krisannya. Kalo sempet :p', 'success');
 _goto(url('/#krisan'));

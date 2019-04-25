@@ -87,7 +87,7 @@
               &lt;/VirtualHost&gt;
             </pre>
           </p>
-          <p><small>*tutorial lengkapnya googling aja yaa di youtube :p</small></p>
+          <p><small class="small">*tutorial lengkapnya googling aja yaa di youtube :p</small></p>
         </div>
       </div>
       <div class="tab-pane" id="nginx">
@@ -109,7 +109,7 @@
               }
             </pre>
           </p>
-          <p><small>*tutorial lengkapnya googling aja yaa di youtube :p</small></p>
+          <p><small class="small">*tutorial lengkapnya googling aja yaa di youtube :p</small></p>
         </div>
       </div>
       <div class="tab-pane" id="email">
@@ -131,24 +131,51 @@
       <div class="tab-pane" id="krisan" style="overflow-y:hidden">
         <div class="content">
           <h1>Kritik? Saran? Kritik & saran? sok atuh isi formulir..</h1>
+          <?php generateFlashMessages();?>
           <form id="form-krisan" action="<?=url('/krisan')?>" method="post">
             <div class="field">
               <label class="label">Yang mengisi formulir di bawah ini:</label>
-              <div class="control">
+              <!-- <div class="control">
                 <input type="text" name="name" class="input" placeholder="nama.." onblur="checkName(this)">
+              </div> -->
+            </div>
+
+            <div class="field-body">
+              <div class="field">
+                <p class="control is-expanded">
+                <input type="text" name="name" class="input" placeholder="nama..*" onblur="checkName(this)">
+                </p>
+              </div>
+              <div class="field">
+                <p class="control is-expanded">
+                <input type="text" name="email" class="input" placeholder="email..*" onblur="checkEmail(this)">
+                </p>
               </div>
             </div>
 
-            <div class="field">
+            <div class="field-body" style="margin-top:5px;">
+              <div class="field">
+                <p class="control is-expanded">
+                <input type="text" name="phone" class="input" placeholder="no. telepon..">
+                </p>
+              </div>
+              <div class="field">
+                <p class="control is-expanded">
+                <input type="text" name="website" class="input" placeholder="website..">
+                </p>
+              </div>
+            </div>
+
+            <!-- <div class="field">
               <div class="control">
                 <input type="text" name="email" class="input" placeholder="email.." onblur="checkEmail(this)">
               </div>
-            </div>
+            </div> -->
 
             <div class="field">
               <label class="label">Ingin menyampaikan bahwa:</label>
               <div class="control">
-                <textarea name="message" class="textarea" placeholder="pesan.." onblur="checkMessage(this)"></textarea>
+                <textarea name="message" class="textarea" placeholder="pesan..*" onblur="checkMessage(this)"></textarea>
               </div>
             </div>
 

@@ -67,3 +67,22 @@ function validation(array $params)
         return _goto($redirect);
     }
 }
+
+function generateFlashMessages()
+{
+    if (checkFlashMessages()) {
+        echo '<div class="notification">';
+        $messages = getFlashMessages();
+        if (count($messages) > 2) {
+            foreach ($messages as $key => $message) {
+                if ($key != 'type_message') {
+                    echo '<span class="has-text-danger"><small>' . $message . '</small></span><br>';
+                }
+            }
+        } else {
+            $class = $messages['type_message'] == 'failed' ? 'has-text-danger' : 'has-text-link';
+            echo '<span class="' . $class . '">' . $messages['message'] . '</span><br>';
+        }
+        echo '</div>';
+    }
+}
