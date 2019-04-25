@@ -42,7 +42,7 @@ function activityLog($description)
         'post' => json_encode(_post()),
         'files' => json_encode(_files()),
         'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s'),
+        // 'updated_at' => date('Y-m-d H:i:s'),
     ]);
 }
 
@@ -73,15 +73,11 @@ function generateFlashMessages()
     if (checkFlashMessages()) {
         echo '<div class="notification">';
         $messages = getFlashMessages();
-        if (count($messages) > 2) {
-            foreach ($messages as $key => $message) {
-                if ($key != 'type_message') {
-                    echo '<span class="has-text-danger"><small>' . $message . '</small></span><br>';
-                }
-            }
-        } else {
+        foreach ($messages as $key => $message) {
             $class = $messages['type_message'] == 'failed' ? 'has-text-danger' : 'has-text-link';
-            echo '<span class="' . $class . '">' . $messages['message'] . '</span><br>';
+            if ($key != 'type_message') {
+                echo '<span class="' . $class . '"><small>' . $message . '</small></span><br>';
+            }
         }
         echo '</div>';
     }

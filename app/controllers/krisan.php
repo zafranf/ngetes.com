@@ -28,7 +28,7 @@ $save = db()->table('contacts')->insert([
     'website' => _post('website'),
     'thankyou' => bool(_post('thankyou')),
     'created_at' => date('Y-m-d H:i:s'),
-    'updated_at' => date('Y-m-d H:i:s'),
+    // 'updated_at' => date('Y-m-d H:i:s'),
 ]);
 
 setFlashMessage('Ntaps! Nanti dibaca krisannya. Kalo sempet :p', 'success');

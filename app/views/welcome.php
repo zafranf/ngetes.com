@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <title>Subdomain dan inbox email gratis - ngetes.com</title>
-  <!-- <link rel="shortcut icon" href="/images/fav_icon.png" type="image/x-icon"> -->
-  <?=load_css('/css/bulma.min.css')?>
-  <?=load_css('/css/tabs.css')?>
-  <!-- <?=load_css('/css/prism.css')?> -->
-</head>
-
-<body>
-  <section class="hero is-info">
-    <div class="hero-body">
-      <div class="container">
-        <a href="<?=url()?>">
-          <h1 class="title">
-            <b>ngetes.com</b>
-          </h1>
-          <h2 class="subtitle">
-            subdomain gratis buat <i>ngetes</i> aplikasi localhost
-          </h2>
-        </a>
-      </div>
-    </div>
+<?php include 'header.php';?>
     <div class="tabs is-boxed is-centered main-menu" id="nav">
       <ul>
         <li data-target="tentang" id="li-tentang" class="is-active">
@@ -115,17 +89,20 @@
       <div class="tab-pane" id="email">
         <div class="content">
           <h1>Inbox email</h1>
+          <?php generateFlashMessages();?>
           <p>Mau nyobain kirim email dari aplikasi tapi gak mau nyepam ke email pribadi? monggo ketik nama emailnya di sini biar bisa pake <b>&lt;nama&gt;@ngetes.com</b>..</p>
-          <div class="field has-addons">
-            <p class="control">
-              <input class="input" type="text" name="email_name" placeholder="nama">
-            </p>
-            <p class="control">
-              <a class="button is-static">
-                @ngetes.com
-              </a>
-            </p>
-          </div>
+          <form action="<?=url('/openinbox')?>" method="post">
+            <div class="field has-addons">
+              <p class="control">
+                <input class="input" type="text" name="email_name" placeholder="nama" value="<?=_get('name')?>">
+              </p>
+              <p class="control">
+                <a class="button is-static">
+                  @ngetes.com
+                </a>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
       <div class="tab-pane" id="krisan" style="overflow-y:hidden">
@@ -135,9 +112,6 @@
           <form id="form-krisan" action="<?=url('/krisan')?>" method="post">
             <div class="field">
               <label class="label">Yang mengisi formulir di bawah ini:</label>
-              <!-- <div class="control">
-                <input type="text" name="name" class="input" placeholder="nama.." onblur="checkName(this)">
-              </div> -->
             </div>
 
             <div class="field-body">
@@ -166,12 +140,6 @@
               </div>
             </div>
 
-            <!-- <div class="field">
-              <div class="control">
-                <input type="text" name="email" class="input" placeholder="email.." onblur="checkEmail(this)">
-              </div>
-            </div> -->
-
             <div class="field">
               <label class="label">Ingin menyampaikan bahwa:</label>
               <div class="control">
@@ -196,74 +164,9 @@
                 <button type="reset" class="button is-text">Gak jadi</button>
               </div>
             </div>
-            <div class="g-recaptcha"
-                  data-sitekey="<?=config('recaptcha')['site_key']?>"
-                  data-callback="onSubmit"
-                  data-size="invisible">
+            <div class="g-recaptcha" data-sitekey="<?=config('recaptcha')['site_key']?>" data-callback="onSubmit" data-size="invisible">
             </div>
           </form>
-          <!-- <form>
-            <div class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label class="label">Siapa</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="Nama*">
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control is-expanded">
-                    <input class="input" type="email" placeholder="Email*">
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="field is-horizontal">
-              <div class="field-label"></div>
-              <div class="field-body">
-                <div class="field">
-                  <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="Website">
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="No. Telepon">
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label class="label">Pesan</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <textarea class="textarea" placeholder="Apa tuh?"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="field is-horizontal">
-              <div class="field-label">
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <button class="button is-primary">
-                      Kirim
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form> -->
         </div>
       </div>
       <div class="tab-pane" id="tes">
@@ -335,8 +238,4 @@
       }
     });
   </script>
-<!-- </body>
-</html> -->
-
-</body>
-</html>
+<?php include 'footer.php';?>
