@@ -113,8 +113,8 @@
       return (val)
     }
 
-    let formKrisan = document.getElementById('form-krisar');
-    formKrisan.addEventListener('submit', function(e) {
+    let formKrisar = document.getElementById('form-krisar');
+    formKrisar.addEventListener('submit', function(e) {
       e.preventDefault();
       let validName = checkName();
       let validEmail = checkEmail();
@@ -127,7 +127,7 @@
     });
 
     function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       return re.test(String(email).toLowerCase());
     }

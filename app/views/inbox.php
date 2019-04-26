@@ -1,14 +1,16 @@
 <?php include 'header.php';?>
   <style>
-    .tab-pane.is-active {
-      width: 80%;
+    @media screen and (min-width: 769px) {
+      .tab-pane.is-active {
+        width: 80%;
+      }
     }
   </style>
   <div class="tab-content">
     <div class="tab-pane is-active" id="email">
       <div class="content">
         <?php generateFlashMessages();?>
-        <form action="<?=url('/inbox-open')?>" method="post">
+        <form id="form-email" action="<?=url('/inbox-open')?>" method="post">
           <div class="field has-addons">
             <!-- Inbox:&nbsp; -->
             <p class="control">
@@ -51,4 +53,33 @@
       </div>
     </div>
   </div>
+  <script>
+    function checkEmail(el = null) {
+      el = el ? el : document.querySelectorAll('input[name=email_name]')[0];
+      let val = el.value;
+
+      let valid = validateEmail(val);
+      if (!valid) {
+        el.classList.add('is-danger');
+      } else {
+        el.classList.remove('is-danger');
+      }
+
+      return valid;
+    }
+
+    let formEmail = document.getElementById('form-email');
+    formEmail.addEventListener('submit', function(e) {
+      let validEmail = checkEmail();
+      if (!validEmail) {
+        e.preventDefault();
+      }
+    });
+
+    function validateEmail(email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      return re.test(String(email + '@ngetes.com').toLowerCase());
+    }
+  </script>
 <?php include 'footer.php';?>

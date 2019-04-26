@@ -1,4 +1,10 @@
 <?php
+if (_server('REQUEST_METHOD') != 'POST') {
+    return view_error(404);
+}
+
+$parse = parse_url(_post('website'));
+$_POST['website'] = isset($parse['scheme']) ? _post('website') : 'http://' . _post('website');
 activityLog('submit krisar');
 
 $valid = validation([
@@ -16,19 +22,19 @@ $valid = validation([
 $valid_captcha = validateCaptcha(_post('g-recaptcha-response'));
 if (!$valid_captcha) {
     setFlashMessage('Gagal validasi captcha');
-    _goto(url('/#krisar'));
+    _goto(url('/krisar'));
 }
 
 $save = db()->table('contacts')->insert([
     'name' => _post('name'),
     'email' => _post('email'),
-    'message' => _post('message'),
     'phone' => _post('phone'),
     'website' => _post('website'),
+    'message' => _post('message'),
     'thankyou' => bool(_post('thankyou')),
     'created_at' => date('Y-m-d H:i:s'),
     // 'updated_at' => date('Y-m-d H:i:s'),
 ]);
 
 setFlashMessage('Ntaps! Nanti dibaca krisarnya. Kalo sempet :p', 'success');
-_goto(url('/#krisar'));
+_goto(url('/krisar'));

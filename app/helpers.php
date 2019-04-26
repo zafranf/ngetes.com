@@ -55,13 +55,15 @@ function validation(array $params)
     $redirect = $params['redirect'] ?? _server('HTTP_REFERER');
 
     $validator = new \Rakit\Validation\Validator;
+    $validation = $validator->make($requests, $rules);
     if (!empty($messages)) {
-        $validator->setMessages($messages);
+        $validation->setMessages($messages);
     }
     if (!empty($aliases)) {
-        $validator->setAliases($aliases);
+        $validation->setAliases($aliases);
     }
-    $validation = $validator->validate($requests, $rules);
+    $validation->validate();
+
     if ($validation->fails()) {
         setFlashMessages($validation->errors->firstOfAll());
         return _goto($redirect);

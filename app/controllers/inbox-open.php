@@ -1,18 +1,24 @@
 <?php
 if (_server('REQUEST_METHOD') != 'POST') {
-    _goto(url('/'));
+    return view_error(404);
 }
 
 $name = strtolower(_post('email_name'));
-$_POST['email'] = $name; // . '@ngetes.com';
-unset($_POST['email_name']);
+// $_POST['email'] = $name; // . '@ngetes.com';
+// unset($_POST['email_name']);
 $path = rtrim(parse_url(_server('HTTP_REFERER'))['path'], '/');
 activityLog('open inbox via ' . $path);
 
 $valid = validation([
     'requests' => _post(),
     'rules' => [
-        'email' => 'required|regex:/^[a-zA-Z0-9_.]*$/',
+        'email_name' => 'required|regex:/^[a-zA-Z0-9_.]*$/',
+    ],
+    'aliases' => [
+        'email_name' => 'Email',
+    ],
+    'messages' => [
+        'regex' => 'etdah salah',
     ],
     'redirect' => $path ?? url('/'),
 ]);
