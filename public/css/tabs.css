@@ -4,7 +4,7 @@
 }
 
 .tab-content {
-    padding: 60px;
+    padding: 30px;
     top: 197px;
     color: #000;
     background-color: white;
@@ -68,9 +68,6 @@ pre {
 }
 
 @media screen and (max-width: 768px) {
-    .tab-content {
-        padding: 30px;
-    }
     .tab-pane.is-active {
         display: block;
         width: 100%;

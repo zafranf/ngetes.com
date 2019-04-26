@@ -1,48 +1,14 @@
 <?php include 'header.php';?>
   <style>
-  .tab-pane.is-active {
-    width: 80%;
-  }
+    .tab-pane.is-active {
+      width: 80%;
+    }
   </style>
-  <div class="tabs is-boxed is-centered main-menu" id="nav">
-    <ul>
-      <li data-target="tentang" id="li-tentang">
-        <a href="<?=url('/#tentang')?>">
-          <span>Tentang</span>
-        </a>
-      </li>
-      <li data-target="apache" id="li-apache">
-        <a href="<?=url('/#apache')?>">
-          <span>Apache</span>
-        </a>
-      </li>
-      <li data-target="nginx" id="li-nginx">
-        <a href="<?=url('/#nginx')?>">
-          <span>Nginx</span>
-        </a>
-      </li>
-      <li data-target="email" id="li-email" class="is-active">
-        <a href="<?=url('/#email')?>">
-          <span>Email</span>
-        </a>
-      </li>
-      <li data-target="krisan" id="li-krisan">
-        <a href="<?=url('/#krisan')?>">
-          <span>Krisan</span>
-        </a>
-      </li>
-      <li data-target="tes" id="li-tes">
-        <a href="<?=url('/#tes')?>">
-          <span>Bantu ngetes?</span>
-        </a>
-      </li>
-    </ul>
-  </div>
   <div class="tab-content">
     <div class="tab-pane is-active" id="email">
       <div class="content">
         <?php generateFlashMessages();?>
-        <form action="<?=url('/openinbox')?>" method="post">
+        <form action="<?=url('/inbox-open')?>" method="post">
           <div class="field has-addons">
             <!-- Inbox:&nbsp; -->
             <p class="control">
@@ -55,6 +21,14 @@
             </p>
           </div>
         </form>
+        <p>
+          <small>
+            Catet:<br>
+            - <b>data</b>, 30 email terakhir diambil tiap menit<br>
+            - <b>unread</b>, dihapus tiap 60 menit<br>
+            - <b>read</b>, dihapus tiap 20 menit<br>
+          </small>
+        </p>
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>

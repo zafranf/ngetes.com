@@ -1,7 +1,19 @@
 let hash = location.hash;
 if (hash.length) {
-    let id = hash.replace("#", "")
+    let id = hash.replace("#", "");
     toggleTab('li-' + id, id);
+    console.log('ini hash', hash);
+} else {
+    let path = location.pathname;
+    if (path.length) {
+        let id = path.replace("/", "");
+        if (!id.length) {
+            id = 'tentang';
+        }
+        toggleTab('li-' + id, id);
+        console.log('ini id path', id);
+    }
+    console.log('ini path', path);
 }
 
 document.querySelectorAll("#nav li").forEach(function(navEl) {
@@ -33,11 +45,11 @@ function toggleTab(selectedNav, targetId) {
         }
     });
 
-    if (history.pushState) {
+    /* if (history.pushState) {
         history.pushState(null, null, '#' + targetId);
     } else {
         location.hash = '#' + targetId;
-    }
+    } */
 }
 
 function validateEmail(email) {

@@ -1,3 +1,7 @@
+<?php
+$path = trim(_server('REQUEST_URI'), '/');
+$active = 'class="is-active"';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,4 +27,39 @@
           </h2>
         </a>
       </div>
+    </div>
+
+    <div class="tabs is-boxed is-centered main-menu" id="nav">
+      <ul>
+        <li data-target="tentang" id="li-tentang" <?=$path == 'tentang' || $path == '' ? $active : '';?>>
+            <a href="<?=url('/tentang')?>">
+            <span>Tentang</span>
+            </a>
+        </li>
+        <li data-target="apache" id="li-apache" <?=$path == 'apache' ? $active : '';?>>
+            <a href="<?=url('/apache')?>">
+            <span>Apache</span>
+            </a>
+        </li>
+        <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
+            <a href="<?=url('/nginx')?>">
+            <span>Nginx</span>
+            </a>
+        </li>
+        <li data-target="email" id="li-email" <?=$path == 'email' ? $active : '';?>>
+            <a href="<?=url('/email')?>">
+            <span>Email</span>
+            </a>
+        </li>
+        <li data-target="krisar" id="li-krisar" <?=$path == 'krisar' ? $active : '';?>>
+            <a href="<?=url('/krisar')?>">
+            <span>Krisar</span>
+            </a>
+        </li>
+        <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?>>
+            <a href="<?=url('/bantu-tes')?>">
+            <span>Bantu ngetes?</span>
+            </a>
+        </li>
+      </ul>
     </div>
