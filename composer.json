@@ -6,7 +6,8 @@
         "zafranf/fnfwcore": "dev-dev",
         "guzzlehttp/guzzle": "^6.3",
         "rakit/validation": "^1.1",
-        "jenssegers/agent": "^2.6"
+        "jenssegers/agent": "^2.6",
+        "php-imap/php-imap": "^3.0"
     },
     "license": "MIT",
     "authors": [{
@@ -22,6 +23,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

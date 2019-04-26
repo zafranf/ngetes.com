@@ -1,4 +1,9 @@
 <?php
+function generateToken($string)
+{
+    return md5($string . config('app')['key']);
+}
+
 function spaces($n = 4, $space = "&nbsp;")
 {
     return str_repeat($space, $n);
@@ -125,7 +130,7 @@ function validation(array $params)
 
     if ($validation->fails()) {
         setFlashMessages($validation->errors->firstOfAll());
-        return _goto($redirect);
+        return _goto(($redirect ?? '/'));
     }
 }
 
@@ -142,4 +147,50 @@ function generateFlashMessages()
         }
         echo '</div>';
     }
+}
+
+function getImapAttachments($imap, $uid)
+{
+    $structure = imap_fetchstructure($imap, $uid, FT_UID);
+    debug($structure);
+
+    $attachments = array();
+    if (isset($structure->parts) && count($structure->parts)) {
+        for ($i = 0; $i < count($structure->parts); $i++) {
+            /* $attachments[$i] = array(
+            'is_attachment' => false,
+            'filename' => '',
+            'name' => '',
+            'attachment' => ''); */
+
+            if ($structure->parts[$i]->ifdparameters) {
+                foreach ($structure->parts[$i]->dparameters as $object) {
+                    if (strtolower($object->attribute) == 'filename') {
+                        $attachments[$i]['is_attachment'] = true;
+                        $attachments[$i]['filename'] = $object->value;
+                    }
+                }
+            }
+
+            if ($structure->parts[$i]->ifparameters) {
+                foreach ($structure->parts[$i]->parameters as $object) {
+                    if (strtolower($object->attribute) == 'name') {
+                        $attachments[$i]['is_attachment'] = true;
+                        $attachments[$i]['name'] = $object->value;
+                    }
+                }
+            }
+
+            /* if (isset($attachments[$i]['is_attachment'])) {
+        $attachments[$i]['attachment'] = imap_fetchbody($imap, $uid, $i + 1, FT_UID);
+        if ($structure->parts[$i]->encoding == 3) { // 3 = BASE64
+        $attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
+        } elseif ($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
+        $attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
+        }
+        } */
+        } // for($i = 0; $i < count($structure->parts); $i++)
+    } // if(isset($structure->parts) && count($structure->parts))
+
+    return $attachments;
 }

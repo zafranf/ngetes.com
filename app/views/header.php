@@ -1,5 +1,6 @@
 <?php
-$path = trim(_server('REQUEST_URI'), '/');
+$path = str_replace("?" . _server('QUERY_STRING'), "", _server('REQUEST_URI'));
+$path = trim($path, '/');
 $active = 'class="is-active"';
 ?>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ $active = 'class="is-active"';
             <span>Nginx</span>
             </a>
         </li>
-        <li data-target="email" id="li-email" <?=$path == 'email' ? $active : '';?>>
+        <li data-target="email" id="li-email" <?=$path == 'email' || $path == 'inbox' ? $active : '';?>>
             <a href="<?=url('/email')?>">
             <span>Email</span>
             </a>
