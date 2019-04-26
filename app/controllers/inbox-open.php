@@ -17,9 +17,9 @@ $valid = validation([
     'aliases' => [
         'email_name' => 'Email',
     ],
-    'messages' => [
-        'regex' => 'etdah salah',
-    ],
+    /* 'messages' => [
+    'regex' => 'etdah salah',
+    ], */
     'redirect' => $path ?? url('/'),
 ]);
 
