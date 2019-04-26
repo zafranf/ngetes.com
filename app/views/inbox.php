@@ -3,8 +3,16 @@
     #table-email tbody {
       font-size: 14px;
     }
-    #table-email .unread {
-      font-weight: bold;
+    #table-email tr.unread td:first-child {
+      padding: 0;
+    }
+    #table-email tr.unread td div {
+      /* font-weight: bold; */
+      padding-left: 3px;
+      border-left:5px solid #369cee;
+    }
+    #table-email tr.read {
+      font-weight: lighter;
     }
     @media screen and (min-width: 769px) {
       .tab-pane.is-active {
@@ -51,9 +59,9 @@
         <p>
           <small>
             Catetan:<br>
-            - <b>data</b>, 30 email terakhir diambil tiap menit<br>
-            - <b>unread</b>, dihapus tiap 60 menit<br>
-            - <b>read</b>, dihapus tiap 20 menit<br>
+            - <b>data</b> 30 email terakhir diambil tiap menit<br>
+            - <b>unread</b> dihapus tiap 60 menit<br>
+            - <b>read</b> dihapus tiap 20 menit<br>
             - <b>tanpa</b> file lampiran<br>
           </small>
         </p>
@@ -107,8 +115,9 @@
             data.forEach((mail, n) => {
               let read = mail.read ? 'read' : 'unread';
               let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+              let attachments = mail.attachments > 0 ? '<span style="float:right;">'+ mail.attachments +' lampiran</span>' : '';
               html += '<tr class="'+read+'">';
-              html += '<td>'+sender+'<br>'+ mail.subject +'<br>'+mail.message+'</td>';
+              html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'<br>'+mail.message+'</div></td>';
               html += '<td>'+ mail.date +'</td>';
               html += '</tr>';
             });

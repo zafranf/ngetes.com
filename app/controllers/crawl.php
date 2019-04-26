@@ -50,10 +50,14 @@ foreach ($mails as $mail) {
     // debug($head);
     $markAsSeen = false;
     $body = $mailbox->getMail($mail->uid, $markAsSeen);
+    $message = trim($body->textPlain);
+    // debug(slug($message) == slug("This is a plain-text message body"), $message, slug($message), slug("This is a plain-text message body"));
+    $message = ($message == 'This is a plain-text message body') ? strip_tags($body->textHtml) : $message;
+    $message = strlen($message) > 50 ? substr($message, 0, 50) . '...' : $message;
     $data[] = [
         'id' => $body->id,
         'subject' => $body->subject ?? '[no-subject]',
-        'message' => strlen($body->textPlain) > 50 ? substr($body->textPlain, 0, 50) . '...' : $body->textPlain,
+        'message' => $message,
         'from' => [
             'name' => $body->fromName ?? '',
             'email' => $body->fromAddress ?? '',
