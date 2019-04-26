@@ -5,7 +5,8 @@
     "require": {
         "zafranf/fnfwcore": "dev-dev",
         "guzzlehttp/guzzle": "^6.3",
-        "rakit/validation": "^1.1"
+        "rakit/validation": "^1.1",
+        "jenssegers/agent": "^2.6"
     },
     "license": "MIT",
     "authors": [{

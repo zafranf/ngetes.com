@@ -3,7 +3,7 @@
 session_start();
 
 /* Set Default Timezone */
-date_default_timezone_set('UTC');
+date_default_timezone_set('Asia/Jakarta');
 
 /* Define Public Path */
 define('PUBLIC_PATH', __DIR__ . '/');

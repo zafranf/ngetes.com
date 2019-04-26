@@ -19,6 +19,65 @@ function validateCaptcha($response)
     return $response->success;
 }
 
+function visitorLog()
+{
+    $device = '';
+    $agent = new \Jenssegers\Agent\Agent();
+    if ($agent->isPhone()) {
+        $device = 'phone';
+    } else if ($agent->isTablet()) {
+        $device = 'tablet';
+    } else if ($agent->isDesktop()) {
+        $device = 'desktop';
+    }
+    $device_name = $agent->device();
+    $ip = (_server('REMOTE_ADDR') != null) ? _server('REMOTE_ADDR') : '127.0.0.1';
+    $browser_agent = $agent->getUserAgent();
+    $browser = $agent->browser();
+    $browser_version = $agent->version($browser);
+    $os = $agent->platform();
+    $os_version = $agent->version($os);
+    $page = (_server('REQUEST_URI') != null) ? _server('REQUEST_URI') : '/';
+    $referrer = (_server('HTTP_REFERER') != null) ? _server('HTTP_REFERER') : '';
+    $referral = str_replace(url('/'), "/", $referrer);
+    $is_robot = $agent->isRobot() ? 1 : 0;
+    $robot_name = $is_robot ? $agent->robot : '';
+
+    $params = [
+        'ip' => $ip,
+        'page' => $page,
+        'referral' => $referral,
+        'agent' => $browser_agent,
+        'browser' => $browser,
+        'browser_version' => $browser_version,
+        'device' => $device,
+        'device_name' => $device_name,
+        'os' => $os,
+        'os_version' => $os_version,
+        'is_robot' => $is_robot,
+        'robot_name' => $robot_name,
+    ];
+
+    $table = db()->table('visitor_logs');
+    $q = $table->where(function ($q) {
+        $q->whereBetween('created_at', date("Y-m-d H:00:00"), date("Y-m-d H:59:59"));
+    });
+    foreach ($params as $key => $value) {
+        $q->where($key, $value);
+    }
+    $find = $q->first();
+
+    if (!$find) {
+        $params['count'] = db()->raw('count+1');
+        $params['created_at'] = date("Y-m-d H:i:s");
+        $table->insert($params);
+    } else {
+        $q->update([
+            'count' => db()->raw('count+1'),
+        ]);
+    }
+}
+
 function activityLog($description)
 {
 /* Filter password */
