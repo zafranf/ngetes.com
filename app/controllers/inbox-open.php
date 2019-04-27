@@ -22,6 +22,7 @@ $valid = validation([
     ], */
     'redirect' => $path ?? url('/'),
 ]);
+$_SESSION['email_name'] = _post('email_name');
 
 $table = db()->table('names');
 $q = $table->where('name', $name)->where('via', $path);

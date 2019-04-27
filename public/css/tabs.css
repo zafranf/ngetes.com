@@ -67,6 +67,15 @@ pre {
     height: 100%;
 }
 
+.footer {
+    padding: 10px 0;
+    border-top: 1px solid #f0f0f0;
+    font-size: 12px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 @media screen and (max-width: 768px) {
     .tab-pane.is-active {
         display: block;

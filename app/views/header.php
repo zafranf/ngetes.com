@@ -7,7 +7,7 @@ $active = 'class="is-active"';
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta content="width=device-width,initial-scale=1" name="viewport">
   <title>Subdomain dan inbox email gratis - ngetes.com</title>
   <!-- <link rel="shortcut icon" href="/images/fav_icon.png" type="image/x-icon"> -->
@@ -47,7 +47,7 @@ $active = 'class="is-active"';
             <span>Nginx</span>
             </a>
         </li>
-        <li data-target="email" id="li-email" <?=$path == 'email' || $path == 'inbox' ? $active : '';?>>
+        <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
             <a href="<?=url('/email')?>">
             <span>Email</span>
             </a>
