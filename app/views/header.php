@@ -9,6 +9,7 @@ $active = 'class="is-active"';
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta name="robots" content="index, follow">
   <title>Subdomain dan inbox email gratis - ngetes.com</title>
   <!-- <link rel="shortcut icon" href="/images/fav_icon.png" type="image/x-icon"> -->
   <?=load_css('/css/bulma.min.css')?>
@@ -19,7 +20,7 @@ $active = 'class="is-active"';
   <section class="hero is-info">
     <div class="hero-body">
       <div class="container">
-        <a href="<?=url()?>">
+        <a href="<?=url('/')?>">
           <h1 class="title">
             <b>ngetes.com</b>
           </h1>
