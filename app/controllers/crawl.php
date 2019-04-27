@@ -44,26 +44,27 @@ rsort($ids);
 /* ambil 30 terakhir */
 array_splice($ids, 30);
 $mails = $mailbox->getMailsInfo($ids);
+// debug($mails);
 foreach ($mails as $mail) {
     // debug($mail);
     // $head = $mailbox->getMailHeader($mail->uid);
     // debug($head);
-    $markAsSeen = false;
-    $body = $mailbox->getMail($mail->uid, $markAsSeen);
-    $message = trim($body->textPlain);
+    // $markAsSeen = false;
+    // $body = $mailbox->getMail($mail->uid, $markAsSeen);
+    // $message = trim($body->textPlain);
     // debug(slug($message) == slug("This is a plain-text message body"), $message, slug($message), slug("This is a plain-text message body"));
-    $message = ($message == 'This is a plain-text message body') ? strip_tags($body->textHtml) : $message;
-    $message = strlen($message) > 50 ? substr($message, 0, 50) . '...' : $message;
+    // $message = ($message == 'This is a plain-text message body') ? strip_tags($body->textHtml) : $message;
+    // $message = strlen($message) > 50 ? substr($message, 0, 50) . '...' : $message;
     $data[] = [
-        'id' => $body->id,
-        'subject' => $body->subject ?? '[no-subject]',
-        'message' => $message,
-        'from' => [
-            'name' => $body->fromName ?? '',
-            'email' => $body->fromAddress ?? '',
-        ],
-        'date' => date("Y-m-d H:i:s", strtotime($body->date)),
-        'attachments' => count($body->getAttachments()),
+        'id' => $mail->uid,
+        'subject' => $mail->subject ?? '[no-subject]',
+        'message' => '', //$message,
+        'from' => $mail->from, /* [
+        'name' => $body->fromName ?? '',
+        'email' => $body->fromAddress ?? '',
+        ], */
+        'date' => date("Y-m-d H:i:s", $mail->udate),
+        'attachments' => '', //count($body->getAttachments()),
         'read' => $mail->seen,
     ];
     // debug($data);

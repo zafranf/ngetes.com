@@ -3,8 +3,14 @@
     #table-email tbody {
       font-size: 14px;
     }
+    #table-email tr {
+      cursor: pointer;
+    }
     #table-email tr.unread td:first-child {
       padding: 0;
+    }
+    #table-email tr.unread td:last-child {
+      padding: 0 .5em;
     }
     #table-email tr.unread td div {
       /* font-weight: bold; */
@@ -34,6 +40,9 @@
               <a class="button is-static">
                 @ngetes.com
               </a>
+            </p>
+            <p class="control">
+              <button class="button" id="btn-go">✓</button>
             </p>
           </div>
         </form>
@@ -97,10 +106,12 @@
       return re.test(String(email + '@ngetes.com').toLowerCase());
     }
 
-    function getData() {
-      let name = '<?=_get('name')?>';
+    function crawlEmails() {
       let token = '<?=generateToken(_get('name') . _session('token_time'))?>';
+      let name = '<?=_get('name')?>';
       if (name.length) {
+        localStorage.setItem("email_name", name);
+
         var request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl')?>', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -114,15 +125,21 @@
             let data = res.data
             data.forEach((mail, n) => {
               let read = mail.read ? 'read' : 'unread';
-              let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+              // let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+              let sender = mail.from;
               let attachments = mail.attachments > 0 ? '<span style="float:right;">'+ mail.attachments +' lampiran</span>' : '';
-              html += '<tr class="'+read+'">';
-              html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'<br>'+mail.message+'</div></td>';
+              html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'\'" class="'+read+'">';
+              // html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'<br>'+mail.message+'</div></td>';
+              html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'</div></td>';
               html += '<td>'+ mail.date +'</td>';
               html += '</tr>';
             });
             let tbody = document.getElementsByTagName('tbody')[0];
             tbody.innerHTML = html;
+
+            setTimeout(function() {
+              crawlEmails();
+            }, 1000 * 60)
           } else {
             // We reached our target server, but it returned an error
 
@@ -137,6 +154,6 @@
       }
     }
 
-    getData()
+    crawlEmails()
   </script>
 <?php include 'footer.php';?>

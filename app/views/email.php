@@ -15,6 +15,9 @@
                 @ngetes.com
               </a>
             </p>
+            <p class="control">
+              <button class="button" id="btn-go">✓</button>
+            </p>
           </div>
         </form>
         <p>
