@@ -1,5 +1,6 @@
 <?php
 return $routes = [
-    'test' => 'welcome',
     'tentang' => 'welcome',
+    'inbox/mail' => 'inbox-detail',
+    'crawl/single' => 'crawl-single',
 ];

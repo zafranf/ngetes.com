@@ -194,3 +194,13 @@ function getImapAttachments($imap, $uid)
 
     return $attachments;
 }
+
+function response($data, $statusCode = 200, $json = true)
+{
+    http_response_code($statusCode);
+    if ($json) {
+        header('Content-Type: application/json');
+    }
+
+    echo json_encode($data);
+}
