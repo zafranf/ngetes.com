@@ -94,11 +94,15 @@
   </div>
   <script>
     var name = '<?=_get('name')?>';
+    var is_loading = false;
 
     let formEmail = document.getElementById('form-email');
     formEmail.addEventListener('submit', function(e) {
       let validEmail = checkEmail();
-      if (!validEmail) {
+      if (!validEmail || is_loading) {
+        if (is_loading) {
+          console.log('masih loading kak, sabar ya :)');
+        }
         e.preventDefault();
       }
     });
@@ -123,6 +127,17 @@
       return re.test(String(email + '@ngetes.com').toLowerCase());
     }
 
+    function loading(start = true) {
+      is_loading = start;
+      let span = '<span class="loader"></span>';
+      if (!start) {
+        span = '<span>✓</span>';
+      }
+
+      let load = document.getElementById('btn-go');
+      load.innerHTML = span;
+    }
+
     function generateEmails(data) {
       let html = '';
       data.forEach((mail, n) => {
@@ -137,6 +152,8 @@
     }
 
     function crawlEmails() {
+      loading();
+
       let token = '<?=generateToken(_get('name') . _session('token_time'))?>';
       if (name.length) {
         // localStorage.setItem("email_name", name);
@@ -153,6 +170,7 @@
             let data = res.data;
             generateEmails(data);
 
+            loading(false);
             localStorage.setItem("the_emails", JSON.stringify(data));
             setTimeout(function() {
               crawlEmails();
