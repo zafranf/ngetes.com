@@ -47,7 +47,7 @@ $active = 'class="is-active"';
             <span>Nginx</span>
             </a>
         </li>
-        <li data-target="email" id="li-email" <?=$path == 'email' || $path == 'inbox' ? $active : '';?>>
+        <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
             <a href="<?=url('/email')?>">
             <span>Email</span>
             </a>

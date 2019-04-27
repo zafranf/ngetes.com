@@ -1,4 +1,9 @@
 <?php include 'header.php';?>
+  <style>
+    #btn-go {
+      color: #369cee;
+    }
+  </style>
   <div class="tab-content">
     <div class="tab-pane is-active" id="email">
       <div class="content">

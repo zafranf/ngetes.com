@@ -58,13 +58,13 @@ foreach ($mails as $mail) {
     $data[] = [
         'id' => $mail->uid,
         'subject' => $mail->subject ?? '[no-subject]',
-        'message' => '', //$message,
-        'from' => $mail->from, /* [
+        // 'message' => '', //$message,
+        'from' => str_replace(['<', '>'], ['(', ')'], $mail->from), /* [
         'name' => $body->fromName ?? '',
         'email' => $body->fromAddress ?? '',
         ], */
-        'date' => date("Y-m-d H:i:s", $mail->udate),
-        'attachments' => '', //count($body->getAttachments()),
+        'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
+        // 'attachments' => '', //count($body->getAttachments()),
         'read' => $mail->seen,
     ];
     // debug($data);

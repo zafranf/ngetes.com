@@ -1,10 +1,24 @@
 <?php include 'header.php';?>
   <style>
+    #btn-go {
+      color: #369cee;
+    }
+    #table-wrapper {
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+    }
+    #table-email {
+      border-radius: 4px;
+      border-style: hidden;
+    }
     #table-email tbody {
       font-size: 14px;
     }
     #table-email tr {
       cursor: pointer;
+    }
+    #table-email tr.unread {
+      font-weight: 500;
     }
     #table-email tr.unread td:first-child {
       padding: 0;
@@ -13,7 +27,6 @@
       padding: 0 .5em;
     }
     #table-email tr.unread td div {
-      /* font-weight: bold; */
       padding-left: 3px;
       border-left:5px solid #369cee;
     }
@@ -46,25 +59,27 @@
             </p>
           </div>
         </form>
-        <table id="table-email" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th width="105">Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="2" style="text-align:center">
-              <?php if (_get('name')) {?>
-                Masih kosong. Coba kirim email ke <u><a href="mailto:<?=_get('name')?>@ngetes.com"><?=_get('name')?>@ngetes.com</a></u>.
-              <?php } else {?>
-                Diisi dulu dong nama emailnya ;)
-              <?php }?>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="table-wrapper">
+          <table id="table-email" class="table is-bordered is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th width="96">Tanggal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                <?php if (_get('name')) {?>
+                  Masih kosong. Coba kirim email ke <u><a href="mailto:<?=_get('name')?>@ngetes.com"><?=_get('name')?>@ngetes.com</a></u>.
+                <?php } else {?>
+                  Diisi dulu dong nama emailnya ;)
+                <?php }?>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           <small>
             Catetan:<br>
@@ -78,6 +93,16 @@
     </div>
   </div>
   <script>
+    var name = '<?=_get('name')?>';
+
+    let formEmail = document.getElementById('form-email');
+    formEmail.addEventListener('submit', function(e) {
+      let validEmail = checkEmail();
+      if (!validEmail) {
+        e.preventDefault();
+      }
+    });
+
     function checkEmail(el = null) {
       el = el ? el : document.querySelectorAll('input[name=email_name]')[0];
       let val = el.value;
@@ -92,25 +117,29 @@
       return valid;
     }
 
-    let formEmail = document.getElementById('form-email');
-    formEmail.addEventListener('submit', function(e) {
-      let validEmail = checkEmail();
-      if (!validEmail) {
-        e.preventDefault();
-      }
-    });
-
     function validateEmail(email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       return re.test(String(email + '@ngetes.com').toLowerCase());
     }
 
+    function generateEmails(data) {
+      let html = '';
+      data.forEach((mail, n) => {
+        let read = mail.read ? 'read' : 'unread';
+        html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'/'+name+'\'" class="'+read+'">';
+        html += '<td><div>'+mail.from+'<br>'+ mail.subject +'</div></td>';
+        html += '<td>'+ mail.date +'</td>';
+        html += '</tr>';
+      });
+      let tbody = document.getElementsByTagName('tbody')[0];
+      tbody.innerHTML = html;
+    }
+
     function crawlEmails() {
       let token = '<?=generateToken(_get('name') . _session('token_time'))?>';
-      let name = '<?=_get('name')?>';
       if (name.length) {
-        localStorage.setItem("email_name", name);
+        // localStorage.setItem("email_name", name);
 
         var request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl')?>', true);
@@ -121,22 +150,10 @@
             // Success!
             let res = JSON.parse(request.responseText);
             console.log(res);
-            let html = '';
-            let data = res.data
-            data.forEach((mail, n) => {
-              let read = mail.read ? 'read' : 'unread';
-              // let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
-              let sender = mail.from;
-              let attachments = mail.attachments > 0 ? '<span style="float:right;">'+ mail.attachments +' lampiran</span>' : '';
-              html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'\'" class="'+read+'">';
-              // html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'<br>'+mail.message+'</div></td>';
-              html += '<td><div>'+sender+''+attachments+'<br>'+ mail.subject +'</div></td>';
-              html += '<td>'+ mail.date +'</td>';
-              html += '</tr>';
-            });
-            let tbody = document.getElementsByTagName('tbody')[0];
-            tbody.innerHTML = html;
+            let data = res.data;
+            generateEmails(data);
 
+            localStorage.setItem("the_emails", JSON.stringify(data));
             setTimeout(function() {
               crawlEmails();
             }, 1000 * 60)
@@ -154,6 +171,10 @@
       }
     }
 
-    crawlEmails()
+    crawlEmails();
+    if (localStorage.the_emails) {
+      let data = JSON.parse(localStorage.the_emails);
+      generateEmails(data);
+    }
   </script>
 <?php include 'footer.php';?>
