@@ -37,6 +37,7 @@
     </div>
   </div>
   <script>
+    var name = '<?=$name?>';
     var loading_time;
 
     function backToInbox() {
@@ -104,9 +105,8 @@
       loading();
       let token = '<?=generateToken($name . _session('token_time'))?>';
       let id = parseInt('<?=$id?>');
-      let name = '<?=$name?>';
       if (name.length && id > 0) {
-        var request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl/single')?>', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 

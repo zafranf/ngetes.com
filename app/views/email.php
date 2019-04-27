@@ -33,8 +33,20 @@
     </div>
   </div>
   <script>
+    let formEmail = document.getElementById('form-email');
+    formEmail.addEventListener('submit', function(e) {
+      let el = document.querySelectorAll('input[name=email_name]')[0];
+      let val = el.value;
+
+      let validEmail = checkEmail(el);
+      if (!validEmail) {
+        e.preventDefault();
+      }
+
+      // localStorage.setItem("email_name", val);
+    });
+
     function checkEmail(el = null) {
-      el = el ? el : document.querySelectorAll('input[name=email_name]')[0];
       let val = el.value;
 
       let valid = validateEmail(val);
@@ -46,14 +58,6 @@
 
       return valid;
     }
-
-    let formEmail = document.getElementById('form-email');
-    formEmail.addEventListener('submit', function(e) {
-      let validEmail = checkEmail();
-      if (!validEmail) {
-        e.preventDefault();
-      }
-    });
 
     function validateEmail(email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

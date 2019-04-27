@@ -47,7 +47,7 @@
           <div class="field has-addons">
             <!-- Inbox:&nbsp; -->
             <p class="control">
-              <input class="input" type="text" name="email_name" placeholder="nama" value="<?=_get('name')?>">
+              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=_get('name') ?? _session('email_name')?>">
             </p>
             <p class="control">
               <a class="button is-static">
@@ -80,7 +80,7 @@
             </tbody>
           </table>
         </div>
-        <p>
+        <p style="margin-top:10px;">
           <small>
             Catetan:<br>
             - <b>data</b> 30 email terakhir diambil tiap menit<br>
@@ -93,22 +93,30 @@
     </div>
   </div>
   <script>
+    <?php if (_get('name')) {?>
     var name = '<?=_get('name')?>';
+    <?php } else {?>
+    var name = localStorage.email_name;
+    <?php }?>
     var is_loading = false;
 
     let formEmail = document.getElementById('form-email');
     formEmail.addEventListener('submit', function(e) {
-      let validEmail = checkEmail();
+      let el = document.querySelectorAll('input[name=email_name]')[0];
+      let val = el.value;
+
+      let validEmail = checkEmail(el);
       if (!validEmail || is_loading) {
         if (is_loading) {
           console.log('masih loading kak, sabar ya :)');
         }
         e.preventDefault();
       }
+
+      // localStorage.setItem("email_name", val);
     });
 
     function checkEmail(el = null) {
-      el = el ? el : document.querySelectorAll('input[name=email_name]')[0];
       let val = el.value;
 
       let valid = validateEmail(val);
@@ -154,11 +162,9 @@
     function crawlEmails() {
       loading();
 
-      let token = '<?=generateToken(_get('name') . _session('token_time'))?>';
+      let token = '<?=generateToken(_session('email_name') . _session('token_time'))?>';
       if (name.length) {
-        // localStorage.setItem("email_name", name);
-
-        var request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl')?>', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
@@ -166,23 +172,27 @@
           if (request.status >= 200 && request.status < 400) {
             // Success!
             let res = JSON.parse(request.responseText);
-            console.log(res);
+            // console.log(res);
             let data = res.data;
-            generateEmails(data);
+            if (data.length > 0) {
+              generateEmails(data);
+            }
 
             loading(false);
+            localStorage.setItem('email_name', name);
             localStorage.setItem("the_emails", JSON.stringify(data));
             setTimeout(function() {
               crawlEmails();
             }, 1000 * 60)
           } else {
             // We reached our target server, but it returned an error
-
+            loading(false);
           }
         };
 
         request.onerror = function() {
           // There was a connection error of some sort
+          loading(false);
         };
 
         request.send('name=' + name + '&token=' + token);
