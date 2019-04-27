@@ -47,7 +47,7 @@
           <div class="field has-addons">
             <!-- Inbox:&nbsp; -->
             <p class="control">
-              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=_get('name') ?? _session('email_name')?>">
+              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=(_get('name') ?? _session('email_name'))?>">
             </p>
             <p class="control">
               <a class="button is-static">
@@ -70,8 +70,8 @@
             <tbody>
               <tr>
                 <td colspan="2" style="text-align:center">
-                <?php if (_get('name')) {?>
-                  Masih kosong. Coba kirim email ke <u><a href="mailto:<?=_get('name')?>@ngetes.com"><?=_get('name')?>@ngetes.com</a></u>.
+                <?php if (_get('name') || _session('email_name')) {?>
+                  Masih kosong. Coba kirim email ke <u><a href="mailto:<?=(_get('name') ?? _session('email_name'))?>@ngetes.com"><?=(_get('name') ?? _session('email_name'))?>@ngetes.com</a></u>.
                 <?php } else {?>
                   Diisi dulu dong nama emailnya ;)
                 <?php }?>
@@ -106,10 +106,7 @@
       let val = el.value;
 
       let validEmail = checkEmail(el);
-      if (!validEmail || is_loading) {
-        if (is_loading) {
-          console.log('masih loading kak, sabar ya :)');
-        }
+      if (!validEmail) {
         e.preventDefault();
       }
 
@@ -148,21 +145,23 @@
 
     function generateEmails(data) {
       let html = '';
-      data.forEach((mail, n) => {
-        let read = mail.read ? 'read' : 'unread';
-        html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'/'+name+'\'" class="'+read+'">';
-        html += '<td><div>'+mail.from+'<br>'+ mail.subject +'</div></td>';
-        html += '<td>'+ mail.date +'</td>';
-        html += '</tr>';
-      });
-      let tbody = document.getElementsByTagName('tbody')[0];
-      tbody.innerHTML = html;
+      if (data.length) {
+        data.forEach((mail, n) => {
+          let read = mail.read ? 'read' : 'unread';
+          html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'/'+name+'\'" class="'+read+'">';
+          html += '<td><div>'+mail.from+'<br>'+ mail.subject +'</div></td>';
+          html += '<td>'+ mail.date +'</td>';
+          html += '</tr>';
+        });
+        let tbody = document.getElementsByTagName('tbody')[0];
+        tbody.innerHTML = html;
+      }
     }
 
     function crawlEmails() {
       loading();
 
-      let token = '<?=generateToken(_session('email_name') . _session('token_time'))?>';
+      let token = '<?=generateToken((_get('name') ?? _session('email_name')) . _session('token_time'))?>';
       if (name.length) {
         let request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl')?>', true);
@@ -200,7 +199,7 @@
     }
 
     crawlEmails();
-    if (localStorage.the_emails) {
+    if (localStorage.the_emails && localStorage.email_name == name) {
       let data = JSON.parse(localStorage.the_emails);
       generateEmails(data);
     }

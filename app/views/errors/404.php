@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FNFW Error: 404 Page Not Found</title>
+    <title>Error: 404 Page Not Found | <?=config('app')['name']?></title>
     <style>
         body {
             margin: 0;

@@ -18,6 +18,8 @@ if ($token != _post('token')) {
         'status' => false,
         'message' => 'forbidden access',
     ];
+
+    return response($response, $statusCode);
 }
 
 $valid = validation([
@@ -25,6 +27,7 @@ $valid = validation([
     'rules' => [
         'id' => 'required|numeric',
         'name' => 'required|regex:/^[a-zA-Z0-9_.]*$/',
+        'token' => 'required',
     ],
 ]);
 
@@ -50,7 +53,7 @@ $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
 $html = $cssToInlineStyles->convert($content);
 
 $doc = new \DOMDocument();
-@$doc->loadHTML($html);
+@$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 $links = $doc->getElementsByTagName('a');
 foreach ($links as $link) {
     $link->setAttribute('target', '_blank');
@@ -72,6 +75,4 @@ $data = [
 $mailbox->disconnect();
 $response['data'] = $data;
 
-http_response_code($statusCode);
-header('Content-Type: application/json');
-echo json_encode($response);
+return response($response, $statusCode);
