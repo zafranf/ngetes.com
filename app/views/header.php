@@ -58,7 +58,7 @@ $active = 'class="is-active"';
             <span>Krisar</span>
             </a>
         </li>
-        <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?>>
+        <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?> class="is-hidden">
             <a href="<?=url('/bantu-tes')?>">
             <span>Bantu ngetes?</span>
             </a>
