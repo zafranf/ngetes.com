@@ -17,6 +17,9 @@
     #table-email tr {
       cursor: pointer;
     }
+    #table-email tr:last-child {
+      word-wrap: break-word;
+    }
     /* #table-email tr.unread {
       font-weight: 500;
     } */

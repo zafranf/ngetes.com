@@ -4,20 +4,17 @@ if (_server('REQUEST_METHOD') != 'POST') {
 }
 
 $data = [];
-$statusCode = 200;
+$statusCode = 500;
 $response = [
-    'status' => true,
-    'message' => 'success',
+    'status' => false,
+    'message' => 'failed',
     'data' => $data,
 ];
 
 $token = generateToken(_post('name') . _session('token_time'));
 if ($token != _post('token')) {
     $statusCode = 403;
-    $response = [
-        'status' => false,
-        'message' => 'forbidden access',
-    ];
+    $response['message'] = 'forbidden access';
 
     return response($response, $statusCode);
 }
@@ -32,9 +29,9 @@ $valid = validation([
 ]);
 
 /* connect to gmail */
-$hostname = '{imap.gmail.com:993/imap/ssl/novalidate-cert}INBOX';
-$username = 'catchall.ngetes.com@gmail.com';
-$password = 'saiiaganteng';
+$hostname = config('imap')['hostname'];
+$username = config('imap')['username'];
+$password = config('imap')['password'];
 
 // Construct the $mailbox handle
 $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
@@ -42,24 +39,37 @@ $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 // Get INBOX emails after date 2017-01-01
 $ids = $mailbox->searchMailbox('TO "' . _post('name') . '@ngetes.com"');
 if (!in_array(_post('id'), $ids)) {
-    debug('gak ada');
+    $statusCode = 404;
+    $response['message'] = 'mail not found';
+    return response($response, $statusCode);
 }
 
 $body = $mailbox->getMail(_post('id'));
-$content = $body->textHtml ?? $body->textPlain;
-$content = nl2br(trim($content));
+$mailbox->disconnect();
+
+$content = $body->textHtml ?? nl2br($body->textPlain);
+$content = trim($content);
 
 $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
 $html = $cssToInlineStyles->convert($content);
 
-$doc = new \DOMDocument();
+$doc = new \DOMDocument('1.0', 'UTF-8');
 @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 $links = $doc->getElementsByTagName('a');
 foreach ($links as $link) {
     $link->setAttribute('target', '_blank');
 }
 
-$content = $doc->saveHTML();
+$bodyContent = $doc->getElementsByTagName('body');
+if ($bodyContent && $bodyContent->length > 0) {
+    $bodyContent = $bodyContent->item(0);
+    $content = $doc->savehtml($bodyContent);
+} else {
+    $content = $doc->saveHTML();
+}
+
+$content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
+$content = preg_replace('/\ class="(.*?)"/', '', $content);
 
 $data = [
     'id' => $body->id,
@@ -72,7 +82,12 @@ $data = [
     'date' => date("Y-m-d H:i:s", strtotime($body->date)),
     'attachments' => count($body->getAttachments()),
 ];
-$mailbox->disconnect();
-$response['data'] = $data;
+
+$statusCode = 200;
+$response = [
+    'status' => true,
+    'message' => 'success',
+    'data' => $data,
+];
 
 return response($response, $statusCode);

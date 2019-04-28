@@ -3,12 +3,12 @@
     <div class="tab-pane is-active" id="tentang">
       <div class="content">
           <h1>Duh,</h1>
-          <p>apa ya? Udah ada di slogan sih 😜 <!-- Pake aja deh, gratis. Serius. --></p>
+          <p>apa ya? Udah ada di slogan sih. 😜 <!-- Pake aja deh, gratis. Serius. --></p>
           <hr>
           <p>
             <small style="font-size:smallest"><p>Hehehe,</p>
             <p>Itu yang utamanya sih, buat ngetes aplikasi localhost pake domain beneran. Berguna banget buat yang mau develop aplikasi di localhost pake API pihak ketiga tapi butuh domain asli. Ada juga buat ngetes kiriman email. Biar gak nyepam email pribadi. Ntaps kan? 😉👍</p>
-            <p>Kalo mau pake yang subdomain, semua projek mesti ada folder <u>public</u> dan di dalamnya ada <u>index.php</u>-nya, kayak framework2 kekinian. Soalnya subdomain-nya langsung ngarah ke folder. Kalo gak ada, bisa diatur kayak gini:</p>
+            <p>Kalo mau pake yang subdomain, semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian. Soalnya subdomain-nya langsung ngarah ke folder. Kalo gak ada, bisa diatur kayak gini:</p>
           <p>misal sebelumnya kayak gini,
             <pre>
               /gratis
