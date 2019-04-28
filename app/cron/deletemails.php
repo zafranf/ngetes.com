@@ -55,6 +55,7 @@ if (!empty($deleteIds)) {
     $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
     // $mailbox->setFlag($deleteIds, '[Gmail]\\/Trash');
 }
+
 $mailbox->disconnect();
 $finish_time = date("Y-m-d H:i:s");
 

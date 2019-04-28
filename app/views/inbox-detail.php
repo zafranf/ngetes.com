@@ -9,6 +9,9 @@
       border-style: hidden;
       font-size: 14px;
     }
+    #table-email a {
+        color: #3273dc;
+    }
     @media screen and (min-width: 769px) {
       .tab-pane.is-active {
         width: 80%;
@@ -26,8 +29,8 @@
           <table id="table-email" class="table is-narrow is-fullwidth">
             <tbody>
               <tr>
-                <td id="loader" colspan="2" style="text-align:center">
-                  Yah, gak ada emailnya :(
+                <td id="content" colspan="2">
+                  Yah, gak ada emailnya 🙁
                 </td>
               </tr>
             </tbody>
@@ -71,9 +74,9 @@
       // console.log('ini dots', dots);
       // console.log('ini n', n);
       n = (n == 3) ? 0 : n;
-      let span = '<span style="font-size:30px;line-height:0;">'+dots+'</span>';
+      let span = '<div style="text-align:center;"><span style="font-size:30px;line-height:0;">'+dots+'</span></div>';
 
-      let load = document.getElementById('loader');
+      let load = document.getElementById('content');
       load.innerHTML = span;
 
       loading_time = setTimeout(function() {
@@ -82,27 +85,30 @@
     }
 
     function generateEmail(mail) {
-      let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
-      if (typeof sender == 'undefined') {
-        sender = mail.from;
+      if (mail) {
+        let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+        if (typeof sender == 'undefined') {
+          sender = mail.from;
+        }
+        let attachments = mail.attachments ? mail.attachments : 0;
+        let content = mail.content ? mail.content : '...';
+
+        let html = '<tr>';
+        html += '<td style="border-right:0;"><span id="subject">'+mail.subject+'</span><br><span id="sender"><small>'+sender+'</small></span></td>';
+        html += '<td width="156" style="border-left:0;text-align:right;">'+mail.date+'<br><small>'+attachments+' lampiran</small></td>';
+        html += '</tr>';
+        html += '<tr>';
+        html += '<td colspan="2" id="content">'+content+'</td>';
+        html += '</tr>';
+
+        let tbody = document.getElementsByTagName('tbody')[0];
+        tbody.innerHTML = html;
       }
-      let attachments = mail.attachments ? mail.attachments : 0;
-      let content = mail.content ? mail.content : '...';
-
-      let html = '<tr>';
-      html += '<td style="border-right:0;"><span id="subject">'+mail.subject+'</span><br><span id="sender"><small>'+sender+'</small></span></td>';
-      html += '<td width="156" style="border-left:0;text-align:right;">'+mail.date+'<br><small>'+attachments+' lampiran</small></td>';
-      html += '</tr>';
-      html += '<tr>';
-      html += '<td colspan="2" id="loader">'+content+'</td>';
-      html += '</tr>';
-
-      let tbody = document.getElementsByTagName('tbody')[0];
-      tbody.innerHTML = html;
     }
 
     function crawlEmail() {
       loading();
+
       let token = '<?=generateToken($name . _session('token_time'))?>';
       let id = parseInt('<?=$id?>');
       if (name.length && id > 0) {
@@ -119,17 +125,18 @@
             let data = res.data;
             generateEmail(data);
           } else {
+            clearTimeout(loading_time);
             // We reached our target server, but it returned an error
-            let load = document.getElementById('loader');
-            load.innerHTML = 'Yah, gak ada emailnya :(';
+            let load = document.getElementById('content');
+            load.innerHTML = '<div style="text-align:center;">Yah, gak ada emailnya 🙁</div>';
           }
         };
 
         request.onerror = function() {
           clearTimeout(loading_time);
           // There was a connection error of some sort
-          let load = document.getElementById('loader');
-          load.innerHTML = 'Yah, error :((';
+          let load = document.getElementById('content');
+          load.innerHTML = '<div style="text-align:center;">Waduh, herror 😱</div>';
         };
 
         request.send('name=' + name + '&id=' + id + '&token=' + token);
