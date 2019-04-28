@@ -11,7 +11,7 @@ $active = 'class="is-active"';
   <meta content="width=device-width,initial-scale=1" name="viewport">
   <meta name="robots" content="index, follow">
   <title>Subdomain dan inbox email gratis - ngetes.com</title>
-  <!-- <link rel="shortcut icon" href="/images/fav_icon.png" type="image/x-icon"> -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,500,600,700,900" rel="stylesheet">
   <?=load_css('/css/bulma.min.css')?>
   <?=load_css('/css/tabs.css')?>
 </head>
@@ -58,7 +58,7 @@ $active = 'class="is-active"';
             <span>Krisar</span>
             </a>
         </li>
-        <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?>>
+        <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?> class="is-hidden">
             <a href="<?=url('/bantu-tes')?>">
             <span>Bantu ngetes?</span>
             </a>
