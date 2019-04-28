@@ -53,7 +53,14 @@ foreach ($mails as $mail) {
 }
 $mailbox->disconnect();
 
-rsort($data);
+$sort = 'desc';
+usort($data, function ($a, $b) use ($sort) {
+    if ($sort == 'desc') {
+        return strtotime($b['date']) <=> strtotime($a['date']);
+    } else {
+        return strtotime($a['date']) <=> strtotime($b['date']);
+    }
+});
 $response['data'] = $data;
 
 return response($response, $statusCode);
