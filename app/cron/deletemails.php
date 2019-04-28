@@ -52,7 +52,7 @@ foreach ($mails as $n => $mail) {
 
 if (!empty($deleteIds)) {
     // $mailbox->imap('delete', [implode(',', $deleteIds), FT_UID]);
-    $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]\\/Trash', CP_UID]);
+    $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
     // $mailbox->setFlag($deleteIds, '[Gmail]\\/Trash');
 }
 $mailbox->disconnect();
