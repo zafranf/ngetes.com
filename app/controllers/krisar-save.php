@@ -36,5 +36,5 @@ $save = db()->table('contacts')->insert([
     // 'updated_at' => date('Y-m-d H:i:s'),
 ]);
 
-setFlashMessage('Ntaps! Nanti dibaca krisarnya. Kalo sempet :p', 'success');
+setFlashMessage('Ntaps! Nanti dibaca krisarnya. Kalo sempet. 😜', 'success');
 _goto(url('/krisar'));
