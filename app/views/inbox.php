@@ -17,9 +17,9 @@
     #table-email tr {
       cursor: pointer;
     }
-    #table-email tr.unread {
+    /* #table-email tr.unread {
       font-weight: 500;
-    }
+    } */
     #table-email tr.unread td:first-child {
       padding: 0;
     }
@@ -31,7 +31,7 @@
       border-left:5px solid #369cee;
     }
     #table-email tr.read {
-      font-weight: lighter;
+      font-weight: 300;
     }
     @media screen and (min-width: 769px) {
       .tab-pane.is-active {
@@ -109,6 +109,15 @@
       if (!validEmail) {
         e.preventDefault();
       }
+      /* if (val == name) {
+        e.preventDefault();
+        if (is_loading) {
+          console.log('masih loading kak, sabar ya 😉');
+          return;
+        } else {
+          crawlEmails();
+        }
+      } */
 
       // localStorage.setItem("email_name", val);
     });
