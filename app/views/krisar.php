@@ -71,6 +71,19 @@
       document.getElementById("form-krisar").submit();
     }
 
+    let formKrisar = document.getElementById('form-krisar');
+    formKrisar.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let validName = checkName();
+      let validEmail = checkEmail();
+      let validMessage = checkMessage();
+      if (!validName || !validEmail || !validMessage) {
+        e.preventDefault();
+      } else {
+        grecaptcha.execute();
+      }
+    });
+
     function checkName(el = null) {
       el = el ? el : document.querySelectorAll('input[name=name]')[0];
       let val = el.value;
@@ -112,19 +125,6 @@
 
       return (val)
     }
-
-    let formKrisar = document.getElementById('form-krisar');
-    formKrisar.addEventListener('submit', function(e) {
-      e.preventDefault();
-      let validName = checkName();
-      let validEmail = checkEmail();
-      let validMessage = checkMessage();
-      if (!validName || !validEmail || !validMessage) {
-        e.preventDefault();
-      } else {
-        grecaptcha.execute();
-      }
-    });
 
     function validateEmail(email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
