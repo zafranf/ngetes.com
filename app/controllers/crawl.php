@@ -42,16 +42,17 @@ rsort($ids);
 array_splice($ids, config('imap')['limit']);
 
 $mails = $mailbox->getMailsInfo($ids);
+$mailbox->disconnect();
+
 foreach ($mails as $mail) {
     $data[] = [
         'id' => $mail->uid,
         'subject' => $mail->subject ?? '[no-subject]',
-        'from' => str_replace(['<', '>'], ['(', ')'], $mail->from),
+        'from' => str_replace(['<', '>', '"'], ['(', ')', ''], $mail->from),
         'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
         'read' => $mail->seen,
     ];
 }
-$mailbox->disconnect();
 
 $sort = 'desc';
 usort($data, function ($a, $b) use ($sort) {
