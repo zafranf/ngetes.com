@@ -4,11 +4,9 @@
     "type": "project",
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "jenssegers/agent": "^2.6",
         "php-imap/php-imap": "^3.0",
-        "rakit/validation": "^1.1",
         "tijsverkoyen/css-to-inline-styles": "^2.2",
-        "zafranf/fnfwcore": "dev-dev"
+        "zafranf/fnfwcore": "dev-master"
     },
     "license": "MIT",
     "authors": [{
