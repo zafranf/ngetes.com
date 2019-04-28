@@ -19,7 +19,7 @@
             }
           </pre>
         </p>
-        <p><small class="small">*tutorial lengkapnya googling aja yaa di youtube :p</small></p>
+        <p><small class="small">*tutorial lengkapnya googling aja yaa di youtube 😜</small></p>
       </div>
     </div>
   </div>
