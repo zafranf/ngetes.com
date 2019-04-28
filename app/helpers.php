@@ -75,3 +75,16 @@ function getImapAttachments($imap, $uid)
 
     return $attachments;
 }
+
+function mdsort($array, $key, $sort = 'asc')
+{
+    $data = usort($array, function ($a, $b) use ($key, $sort) {
+        if ($sort == 'desc') {
+            return strtotime($b[$key]) <=> strtotime($a[$key]);
+        } else {
+            return strtotime($a[$key]) <=> strtotime($b[$key]);
+        }
+    });
+
+    return $data;
+}
