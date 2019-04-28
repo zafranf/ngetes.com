@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Kritik dan saran';
+$keywords = 'kritik saran, kasih kritik, kasih saran, kasih kritik dan saran';
+$description = 'Kasih kritik dan saran buat pengembangan ngetes.com lebih lanjut';
+include 'header.php';
+?>
   <div class="tab-content">
     <div class="tab-pane is-active" id="krisar" style="overflow-y:hidden">
       <div class="content">

@@ -1,4 +1,10 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Inboxnya ' . (_get('name') ?? _session('email_name'));
+$follow = false;
+$keywords = 'ngetes email masuk, ngetes kirim email gratis';
+$description = 'Daftar email ' . (_get('name') ?? _session('email_name')) . ' di kotak masuk ngetes.com';
+include 'header.php';
+?>
   <style>
     #btn-go {
       color: #369cee;
@@ -101,6 +107,7 @@
     <?php } else {?>
     var name = localStorage.email_name;
     <?php }?>
+    let token = '<?=generateToken((_get('name') ?? _session('email_name')) . _session('token_time'))?>';
     var is_loading = false;
 
     let formEmail = document.getElementById('form-email');
@@ -173,7 +180,6 @@
     function crawlEmails() {
       loading();
 
-      let token = '<?=generateToken((_get('name') ?? _session('email_name')) . _session('token_time'))?>';
       if (name.length) {
         let request = new XMLHttpRequest();
         request.open('POST', '<?=url('/crawl')?>', true);
