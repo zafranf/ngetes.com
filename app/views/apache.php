@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Atur virtualhost apache';
+$keywords = 'ngetes apache, aplikasi localhost pake apache, virtual host apache';
+$description = 'Ngatur virtualhost buat pake apache';
+include 'header.php';
+?>
   <div class="tab-content">
     <div class="tab-pane is-active" id="apache">
       <div class="content">

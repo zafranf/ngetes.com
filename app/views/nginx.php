@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Atur virtualhost nginx';
+$keywords = 'ngetes nginx, aplikasi localhost pake nginx, virtual host nginx';
+$description = 'Ngatur virtualhost buat pake nginx';
+include 'header.php';
+?>
   <div class="tab-content">
     <div class="tab-pane is-active" id="nginx">
       <div class="content">
