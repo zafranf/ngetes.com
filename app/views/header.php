@@ -2,15 +2,29 @@
 $path = str_replace("?" . _server('QUERY_STRING'), "", _server('REQUEST_URI'));
 $path = trim($path, '/');
 $active = 'class="is-active"';
+$title = isset($title) ? $title : 'Subdomain dan inbox email gratis';
+$follow = isset($follow) ? $follow : true;
+$robots = $follow ? 'index, follow' : 'noindex, nofollow';
+$keywords = isset($keywords) ? $keywords : 'ngetes, ngetes aplikasi, coba aplikasi, aplikasi localhost, ngetes email, email gratis, subdomain gratis';
+$description = isset($description) ? $description : 'Subdomain dan inbox email gratis buat ngetes aplikasi localhost';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
+  <title><?=$title?> | <?=config('app')['name']?></title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta name="robots" content="index, follow">
-  <title>Subdomain dan inbox email gratis - ngetes.com</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="<?=$robots?>">
+  <meta name="keywords" content="<?=$keywords?>">
+  <meta name="description" content="<?=$description?>">
+  <meta property="og:title" content="<?=$title?> | <?=config('app')['name']?>">
+  <meta property="og:description" content="<?=$description?>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<?=url(_server('REQUEST_URI'))?>">
+  <meta property="og:site_name" content="<?=config('app')['name']?>">
+  <meta property="og:locale" content="id_ID">
+  <?php // <meta property="og:image" content="{{ url($page_image) }}"> ?>
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,500,600,700,900" rel="stylesheet">
   <?=load_css('/css/bulma.min.css')?>
   <?=load_css('/css/tabs.css')?>

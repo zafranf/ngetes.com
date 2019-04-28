@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Kotak masuk email gratis';
+$keywords = 'ngetes email, inbox email gratis, ngetes kirim email, penerima email gratis';
+$description = 'Kotak masuk email gratis buat ngetes2 aplikasi';
+include 'header.php';
+?>
   <style>
     #btn-go {
       color: #369cee;

@@ -1,4 +1,10 @@
-<?php include 'header.php';?>
+<?php
+$title = 'Pesan inboxnya ' . ($name . _session('token_time'));
+$follow = false;
+$keywords = 'baca email kiriman, ngetes email kiriman, buka email kiriman';
+$description = 'Baca email ' . ($name . _session('token_time')) . ' di ngetes.com';
+include 'header.php';
+?>
   <style>
     #table-wrapper {
       border: 1px solid #dbdbdb;
@@ -41,6 +47,7 @@
   </div>
   <script>
     var name = '<?=$name?>';
+    var token = '<?=generateToken($name . _session('token_time'))?>';
     var loading_time;
 
     function backToInbox() {
@@ -109,7 +116,6 @@
     function crawlEmail() {
       loading();
 
-      let token = '<?=generateToken($name . _session('token_time'))?>';
       let id = parseInt('<?=$id?>');
       if (name.length && id > 0) {
         let request = new XMLHttpRequest();
