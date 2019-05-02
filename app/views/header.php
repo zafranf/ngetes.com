@@ -24,7 +24,8 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
   <meta property="og:url" content="<?=url(_server('REQUEST_URI'))?>">
   <meta property="og:site_name" content="<?=config('app')['name']?>">
   <meta property="og:locale" content="id_ID">
-  <?php // <meta property="og:image" content="{{ url($page_image) }}"> ?>
+  <meta property="og:image" content="<?=url('/images/logo.png')?>">
+  <link href="<?=url('/images/icon.png')?>" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,500,600,700,900" rel="stylesheet">
   <?=load_css('/css/bulma.min.css')?>
   <?=load_css('/css/tabs.css')?>
