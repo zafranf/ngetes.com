@@ -20,10 +20,10 @@ include 'header.php';
     #table-email tbody {
       font-size: 14px;
     }
-    #table-email tr {
+    #table-email tbody tr {
       cursor: pointer;
     }
-    #table-email tr:last-child {
+    #table-email tbody tr:last-child {
       word-wrap: break-word;
     }
     /* #table-email tr.unread {

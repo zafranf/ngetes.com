@@ -5,6 +5,7 @@ $keywords = 'baca email kiriman, ngetes email kiriman, buka email kiriman, baca 
 $description = 'Baca emailnya ' . $name . ' di ngetes.com';
 include 'header.php';
 ?>
+<?=load_css('/css/revert.css')?>
   <style>
     #table-wrapper {
       border: 1px solid #dbdbdb;
@@ -15,9 +16,9 @@ include 'header.php';
       border-style: hidden;
       font-size: 14px;
     }
-    #table-email a {
+    /* #table-email a {
         color: #3273dc;
-    }
+    } */
     @media screen and (min-width: 769px) {
       .tab-pane.is-active {
         width: 80%;
@@ -78,16 +79,15 @@ include 'header.php';
     function loading(n=1) {
       let dots = '.';
       dots = dots.repeat(n);
-      // console.log('ini dots', dots);
-      // console.log('ini n', n);
-      n = (n == 3) ? 0 : n;
+      n = (n == 5) ? 0 : n;
       let span = '<div style="text-align:center;"><span style="font-size:30px;line-height:0;">'+dots+'</span></div>';
 
       let load = document.getElementById('content');
       load.innerHTML = span;
 
       loading_time = setTimeout(function() {
-        loading(n+1)
+        n = (n==0)? n+1 : n+2;
+        loading(n);
       }, 500);
     }
 
