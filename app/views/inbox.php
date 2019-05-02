@@ -1,8 +1,8 @@
 <?php
-$title = 'Inboxnya ' . (_get('name') ?? _session('email_name'));
+$title = 'Inboxnya ' . ($name ?? _session('email_name'));
 $follow = false;
-$keywords = 'ngetes email masuk, ngetes kirim email gratis';
-$description = 'Daftar email ' . (_get('name') ?? _session('email_name')) . ' di kotak masuk ngetes.com';
+$keywords = 'ngetes email, ngetes email masuk, ngetes kirim email gratis, buka email di ngetes.com';
+$description = 'Daftar email ' . ($name ?? _session('email_name')) . ' di kotak masuk ngetes.com';
 include 'header.php';
 ?>
   <style>
@@ -56,7 +56,7 @@ include 'header.php';
           <div class="field has-addons">
             <!-- Inbox:&nbsp; -->
             <p class="control">
-              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=(_get('name') ?? _session('email_name'))?>">
+              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=($name ?? _session('email_name'))?>">
             </p>
             <p class="control">
               <a class="button is-static">
@@ -79,8 +79,8 @@ include 'header.php';
             <tbody>
               <tr>
                 <td colspan="2" style="text-align:center">
-                <?php if (_get('name') || _session('email_name')) {?>
-                  Masih kosong. Coba kirim email ke <u><a href="mailto:<?=(_get('name') ?? _session('email_name'))?>@ngetes.com"><?=(_get('name') ?? _session('email_name'))?>@ngetes.com</a></u>.
+                <?php if ($name || _session('email_name')) {?>
+                  Masih kosong. Coba kirim email ke <u><a href="mailto:<?=($name ?? _session('email_name'))?>@ngetes.com"><?=($name ?? _session('email_name'))?>@ngetes.com</a></u>.
                 <?php } else {?>
                   Diisi dulu dong nama emailnya ;)
                 <?php }?>
@@ -102,12 +102,12 @@ include 'header.php';
     </div>
   </div>
   <script>
-    <?php if (_get('name')) {?>
-    var name = '<?=_get('name')?>';
+    <?php if ($name) {?>
+    var name = '<?=$name?>';
     <?php } else {?>
     var name = localStorage.email_name;
     <?php }?>
-    let token = '<?=generateToken((_get('name') ?? _session('email_name')) . _session('token_time'))?>';
+    let token = '<?=generateToken(($name ?? _session('email_name')) . _session('token_time'))?>';
     var is_loading = false;
 
     let formEmail = document.getElementById('form-email');
@@ -167,7 +167,7 @@ include 'header.php';
       if (data.length) {
         data.forEach((mail, n) => {
           let read = mail.read ? 'read' : 'unread';
-          html += '<tr onclick="location.href=\'<?=url('/inbox/mail/')?>'+mail.id+'/'+name+'\'" class="'+read+'">';
+          html += '<tr onclick="location.href=\'<?=url('/inbox/')?>'+name+'/mail/'+mail.id+'\'" class="'+read+'">';
           html += '<td><div>'+mail.from+'<br>'+ mail.subject +'</div></td>';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
@@ -200,16 +200,22 @@ include 'header.php';
             localStorage.setItem("the_emails", JSON.stringify(data));
             setTimeout(function() {
               crawlEmails();
-            }, 1000 * 60)
+            }, 1000 * 60);
           } else {
             // We reached our target server, but it returned an error
             loading(false);
+            setTimeout(function() {
+              crawlEmails();
+            }, 1000 * 60);
           }
         };
 
         request.onerror = function() {
           // There was a connection error of some sort
           loading(false);
+          setTimeout(function() {
+            crawlEmails();
+          }, 1000 * 60);
         };
 
         request.send('name=' + name + '&token=' + token);

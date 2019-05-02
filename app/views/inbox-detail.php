@@ -1,8 +1,8 @@
 <?php
-$title = 'Pesan inboxnya ' . ($name . _session('token_time'));
+$title = 'Baca emailnya ' . $name;
 $follow = false;
-$keywords = 'baca email kiriman, ngetes email kiriman, buka email kiriman';
-$description = 'Baca email ' . ($name . _session('token_time')) . ' di ngetes.com';
+$keywords = 'baca email kiriman, ngetes email kiriman, buka email kiriman, baca email di ngetes.com';
+$description = 'Baca emailnya ' . $name . ' di ngetes.com';
 include 'header.php';
 ?>
   <style>
@@ -36,7 +36,7 @@ include 'header.php';
             <tbody>
               <tr>
                 <td id="content" colspan="2">
-                  Yah, gak ada emailnya 🙁
+                  <div style="text-align:center;">Yah, gak ada emailnya 🙁</div>
                 </td>
               </tr>
             </tbody>
@@ -98,7 +98,7 @@ include 'header.php';
           sender = mail.from;
         }
         let attachments = mail.attachments ? mail.attachments : 0;
-        let content = mail.content ? mail.content : '...';
+        let content = mail.content ? mail.content : '<div style="text-align:center;"><span style="font-size:30px;line-height:0;">...</span></div>';
 
         let html = '<tr>';
         html += '<td style="border-right:0;"><span id="subject">'+mail.subject+'</span><br><span id="sender"><small>'+sender+'</small></span></td>';
