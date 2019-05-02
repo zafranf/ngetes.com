@@ -1,13 +1,17 @@
 <?php
 visitorLog();
 
+$data = [
+    'name' => isset($params[0]) ? $params[0] : null,
+];
+
 if (_session('token_time') == null) {
     $_SESSION['token_time'] = time();
 }
 if (_session('email_name') == null) {
-    if (_get('name')) {
-        $_SESSION['email_name'] = _get('name');
+    if (isset($data['name'])) {
+        $_SESSION['email_name'] = $data['name'];
     }
 }
 
-return view($controller);
+return view($controller, $data);

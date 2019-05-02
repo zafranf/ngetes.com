@@ -1,0 +1,245 @@
+#table-email a {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#table-email strong,
+#table-email b {
+    font-weight: bold;
+}
+
+#table-email div {
+    display: block;
+}
+
+#table-email h1 {
+    display: block;
+    font-size: 2em;
+    -webkit-margin-before: 0.67__qem;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+:-webkit-any(article, aside, nav, section) #table-email h1 {
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83__qem;
+    -webkit-margin-after: 0.83em;
+}
+
+:-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) #table-email h1 {
+    font-size: 1.17em;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+}
+
+:-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) #table-email h1 {
+    font-size: 1.00em;
+    -webkit-margin-before: 1.33__qem;
+    -webkit-margin-after: 1.33em;
+}
+
+:-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) #table-email h1 {
+    font-size: .83em;
+    -webkit-margin-before: 1.67__qem;
+    -webkit-margin-after: 1.67em;
+}
+
+:-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) #table-email h1 {
+    font-size: .67em;
+    -webkit-margin-before: 2.33__qem;
+    -webkit-margin-after: 2.33em;
+}
+
+#table-email h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83__qem;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+#table-email h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+#table-email h4 {
+    display: block;
+    -webkit-margin-before: 1.33__qem;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+#table-email h5 {
+    display: block;
+    font-size: .83em;
+    -webkit-margin-before: 1.67__qem;
+    -webkit-margin-after: 1.67em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+#table-email h6 {
+    display: block;
+    font-size: .67em;
+    -webkit-margin-before: 2.33__qem;
+    -webkit-margin-after: 2.33em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    font-weight: bold
+}
+
+#table-email hr {
+    display: block;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+    border-style: inset;
+    border-width: 1px
+}
+
+#table-email label {
+    cursor: default;
+}
+
+#table-email ul,
+#table-email menu,
+#table-email dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 40px
+}
+
+#table-email ol {
+    display: block;
+    list-style-type: decimal;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 40px
+}
+
+#table-email li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+#table-email ul ul,
+#table-email ol ul {
+    list-style-type: circle
+}
+
+#table-email ol ol ul,
+#table-email ol ul ul,
+#table-email ul ol ul,
+#table-email ul ul ul {
+    list-style-type: square
+}
+
+#table-email dd {
+    display: block;
+    -webkit-margin-start: 40px
+}
+
+#table-email dl {
+    display: block;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+#table-email dt {
+    display: block
+}
+
+#table-email ol ul,
+#table-email ul ol,
+#table-email ul ul,
+#table-email ol ol {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0
+}
+
+#table-email p {
+    display: block;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1__qem;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+#table-email table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray
+}
+
+#table-email thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit
+}
+
+#table-email tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit
+}
+
+#table-email tfoot {
+    display: table-footer-group;
+    vertical-align: middle;
+    border-color: inherit
+}
+
+
+/* for tables without table section elements (can happen with XHTML or dynamically created tables) */
+
+#table-email table>tr {
+    vertical-align: middle;
+}
+
+#table-email col {
+    display: table-column
+}
+
+#table-email colgroup {
+    display: table-column-group
+}
+
+#table-email tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit
+}
+
+#table-email td,
+#table-email th {
+    display: table-cell;
+    vertical-align: inherit
+}
+
+#table-email th {
+    font-weight: bold
+}

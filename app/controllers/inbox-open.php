@@ -41,4 +41,4 @@ if (!$find) {
     ]);
 }
 
-return _goto(url('/inbox?name=' . $name));
+return _goto(url('/inbox/' . $name));
