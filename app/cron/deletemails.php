@@ -35,9 +35,9 @@ foreach ($mails as $n => $mail) {
         $unread++;
     }
 
-    $delete20 = $is_read && ($mailtime <= $min20menit);
-    $delete60 = !$is_read && ($mailtime <= $min60menit);
-    if ($delete20 || $delete60) {
+    $delete_read = $is_read && ($mailtime <= $min20menit);
+    $delete_unread = !$is_read && ($mailtime <= $min60menit);
+    if ($delete_read || $delete_unread) {
         $deleteIds[] = $mail->uid;
         // $mailbox->deleteMail($mail->uid);
 
@@ -60,7 +60,7 @@ $mailbox->disconnect();
 $finish_time = date("Y-m-d H:i:s");
 
 $params = [
-    'crawled' => count($ids),
+    'messages' => count($ids),
     'read' => $read,
     'unread' => $unread,
     'deleted_read' => $deleted_read,
