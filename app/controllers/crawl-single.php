@@ -80,6 +80,10 @@ if (!$mail) {
 
     return response($response, $statusCode);
 }
+$mail->update([
+    'is_read' => 1,
+    'updated_at' => date("Y-m-d H:i:s"),
+]);
 
 $data = [
     'id' => $mail->id,

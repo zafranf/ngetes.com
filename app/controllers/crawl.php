@@ -54,7 +54,7 @@ foreach ($mails as $mail) {
             'email' => $mail->from_email ?? '',
         ],
         'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
-        'read' => $mail->is_read,
+        'read' => (int) $mail->is_read,
     ];
 }
 
