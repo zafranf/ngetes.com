@@ -4,6 +4,7 @@ require_once dirname(__DIR__) . '/../public/index.php';
 
 /* connect to gmail */
 $hostname = config('imap')['hostname'];
+$hostname = str_replace("INBOX", '[Gmail]/Trash', $hostname);
 $username = config('imap')['username'];
 $password = config('imap')['password'];
 
@@ -19,37 +20,39 @@ $deleted_unread = 0;
 $deleteIds = [];
 
 $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
+
 $ids = $mailbox->searchMailbox('BEFORE ' . $tomorrow);
+if (!empty($ids)) {
+    $mails = $mailbox->getMailsInfo($ids);
+    foreach ($mails as $n => $mail) {
+        $mailtime = strtotime($mail->date);
 
-$mails = $mailbox->getMailsInfo($ids);
-foreach ($mails as $n => $mail) {
-    $mailtime = strtotime($mail->date);
-
-    $is_read = $mail->seen;
-    if ($is_read) {
-        $read++;
-    } else {
-        $unread++;
-    }
-
-    $delete_read = $is_read && ($mailtime <= $min20menit);
-    $delete_unread = !$is_read && ($mailtime <= $min60menit);
-    if ($delete_read || $delete_unread) {
-        $deleteIds[] = $mail->uid;
-        // $mailbox->deleteMail($mail->uid);
-
-        $deleted++;
+        $is_read = $mail->seen;
         if ($is_read) {
-            $deleted_read++;
+            $read++;
         } else {
-            $deleted_unread++;
+            $unread++;
+        }
+
+        $delete_read = $is_read && ($mailtime <= $min20menit);
+        $delete_unread = !$is_read && ($mailtime <= $min60menit);
+        if ($delete_read || $delete_unread) {
+            $mailbox->deleteMail($mail->uid);
+
+            $deleted++;
+            if ($is_read) {
+                $deleted_read++;
+            } else {
+                $deleted_unread++;
+            }
+            $deleteIds[] = $mail->uid;
         }
     }
-}
 
-if (!empty($deleteIds)) {
-    $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
-    $mailbox->expungeDeletedMails();
+    /* if (!empty($deleteIds)) {
+$mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
+$mailbox->expungeDeletedMails();
+} */
 }
 
 $mailbox->disconnect();

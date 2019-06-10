@@ -10,6 +10,7 @@ $password = config('imap')['password'];
 $execute_time = date("Y-m-d H:i:s");
 $read = 0;
 $unread = 0;
+
 $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 
 $ids = $mailbox->searchMailbox('ALL');
@@ -79,6 +80,8 @@ if (!empty($ids)) {
             ];
 
             db()->table('emails')->insert($data);
+
+            $mailbox->moveMail($mail->id, '[Gmail]/Trash');
         }
     }
 }
