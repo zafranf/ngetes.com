@@ -36,21 +36,25 @@ $username = config('imap')['username'];
 $password = config('imap')['password'];
 
 // Construct the $mailbox handle
-$mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
+/* $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 $ids = $mailbox->searchMailbox('TO "' . _post('name') . '@ngetes.com"');
 rsort($ids);
 array_splice($ids, config('imap')['limit']);
 
 $mails = $mailbox->getMailsInfo($ids);
-$mailbox->disconnect();
+$mailbox->disconnect(); */
 
+$mails = db()->table('emails')->where('to', 'like', '%' . _post('name') . '@ngetes.com%')->where('is_deleted', 0)->get();
 foreach ($mails as $mail) {
     $data[] = [
-        'id' => $mail->uid,
+        'id' => $mail->id,
         'subject' => $mail->subject ?? '[no-subject]',
-        'from' => str_replace(['<', '>', '"'], ['(', ')', ''], $mail->from),
+        'from' => [
+            'name' => $mail->from_name ?? '',
+            'email' => $mail->from_email ?? '',
+        ],
         'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
-        'read' => $mail->seen,
+        'read' => $mail->is_read,
     ];
 }
 
