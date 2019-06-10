@@ -46,6 +46,15 @@ if (!empty($ids)) {
                 $deleted_unread++;
             }
             $deleteIds[] = $mail->uid;
+
+            $table = db()->table('emails');
+            $q = $table->where('message_id', str_replace(['<', '>'], "", $mail->message_id));
+            $find = $q->first();
+            if ($find) {
+                $q->update([
+                    'is_deleted' => 1,
+                ]);
+            }
         }
     }
 
@@ -58,7 +67,7 @@ $mailbox->expungeDeletedMails();
 $mailbox->disconnect();
 $finish_time = date("Y-m-d H:i:s");
 
-$params = [
+$data = [
     'messages' => count($ids),
     'read' => $read,
     'unread' => $unread,
@@ -70,6 +79,6 @@ $params = [
     'finished_time' => $finish_time,
     'created_at' => date("Y-m-d H:i:s"),
 ];
-db()->table('cron_logs')->insert($params);
+db()->table('cron_logs')->insert($data);
 
-debug($params);
+debug($data);

@@ -17,6 +17,7 @@ $ids = $mailbox->searchMailbox('ALL');
 if (!empty($ids)) {
     foreach ($ids as $id) {
         $info = $mailbox->getMailsInfo([$id])[0];
+
         $is_read = $info->seen;
         if ($is_read) {
             $read++;
@@ -27,9 +28,8 @@ if (!empty($ids)) {
         $exists = db()->table('emails')->where('id', $id)->first();
         if (!$exists) {
             $mail = $mailbox->getMail($id, false);
-            // debug($info, $mail);
 
-            $content = $mail->textHtml ?? nl2br($mail->textPlain);
+            $content = $mail->textHtml ?? nl2br(trim($mail->textPlain));
             $content = trim($content);
 
             $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
@@ -68,7 +68,7 @@ if (!empty($ids)) {
                 'bcc' => json_encode($mail->bcc),
                 'reply_to' => json_encode($mail->replyTo),
                 'subject' => $mail->subject,
-                'text' => $is_plain ? strip_tags($content) : $mail->textPlain,
+                'text' => $is_plain ? strip_tags(trim($content)) : trim($mail->textPlain),
                 'html' => $content,
                 'attachments' => count($mail->getAttachments()),
                 'headers' => json_encode($mail->headers),
@@ -78,7 +78,6 @@ if (!empty($ids)) {
                 'is_deleted' => 0,
                 'created_at' => date("Y-m-d H:i:s"),
             ];
-
             db()->table('emails')->insert($data);
 
             $mailbox->moveMail($mail->id, '[Gmail]/Trash');
