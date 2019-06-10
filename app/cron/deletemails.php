@@ -18,12 +18,9 @@ $deleted_read = 0;
 $deleted_unread = 0;
 $deleteIds = [];
 
-// $hostname = '{imap.gmail.com:993/imap/ssl/novalidate-cert}';
 $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
-// $mailbox->setExpungeOnDisconnect(true);
-// debug($mailbox->getListingFolders());
-
 $ids = $mailbox->searchMailbox('BEFORE ' . $tomorrow);
+
 $mails = $mailbox->getMailsInfo($ids);
 foreach ($mails as $n => $mail) {
     $mailtime = strtotime($mail->date);
@@ -51,9 +48,7 @@ foreach ($mails as $n => $mail) {
 }
 
 if (!empty($deleteIds)) {
-    // $mailbox->imap('delete', [implode(',', $deleteIds), FT_UID]);
     $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
-    // $mailbox->setFlag($deleteIds, '[Gmail]\\/Trash');
 }
 
 $mailbox->disconnect();
@@ -72,5 +67,4 @@ $params = [
 ];
 db()->table('cron_logs')->insert($params);
 
-// $params['deleted_ids'] = $deleteIds;
 debug($params);
