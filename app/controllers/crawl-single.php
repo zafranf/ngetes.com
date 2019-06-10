@@ -73,14 +73,16 @@ $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content)
 $content = preg_replace('/\ class="(.*?)"/', "", $content);
 $content = str_replace(['<body>', '</body>'], "", $content); */
 
-$mail = db()->table('emails')->where('id', _post('id'))->where('is_deleted', 0)->first();
+$table = db()->table('emails');
+$q = $table->where('id', _post('id'))->where('is_deleted', 0);
+$mail = $q->first();
 if (!$mail) {
     $statusCode = 404;
     $response['message'] = 'mail not found';
 
     return response($response, $statusCode);
 }
-$mail->update([
+$q->update([
     'is_read' => 1,
     'updated_at' => date("Y-m-d H:i:s"),
 ]);
