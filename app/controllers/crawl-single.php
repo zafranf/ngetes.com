@@ -45,10 +45,10 @@ if (!in_array(_post('id'), $ids)) {
     return response($response, $statusCode);
 }
 
-$body = $mailbox->getMail(_post('id'));
+$mail = $mailbox->getMail(_post('id'));
 $mailbox->disconnect();
 
-$content = $body->textHtml ?? nl2br($body->textPlain);
+$content = $mail->textHtml ?? nl2br($mail->textPlain);
 $content = trim($content);
 
 $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
@@ -58,32 +58,31 @@ $doc = new \DOMDocument('1.0', 'UTF-8');
 @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 $links = $doc->getElementsByTagName('a');
 foreach ($links as $link) {
-    // $href = $link->getAttribute('href');
-    // $link->setAttribute('href', url($href));
     $link->setAttribute('target', '_blank');
 }
 
 $bodyContent = $doc->getElementsByTagName('body');
 if ($bodyContent && $bodyContent->length > 0) {
     $bodyContent = $bodyContent->item(0);
-    $content = $doc->savehtml($bodyContent);
+    $content = $doc->saveHTML($bodyContent);
 } else {
     $content = $doc->saveHTML();
 }
 
 $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
-$content = preg_replace('/\ class="(.*?)"/', '', $content);
+$content = preg_replace('/\ class="(.*?)"/', "", $content);
+$content = str_replace(['<body>', '</body>'], "", $content);
 
 $data = [
-    'id' => $body->id,
-    'subject' => $body->subject ?? '[no-subject]',
+    'id' => $mail->id,
+    'subject' => $mail->subject ?? '[no-subject]',
     'content' => $content,
     'from' => [
-        'name' => $body->fromName ?? '',
-        'email' => $body->fromAddress ?? '',
+        'name' => $mail->fromName ?? '',
+        'email' => $mail->fromAddress ?? '',
     ],
-    'date' => date("Y-m-d H:i:s", strtotime($body->date)),
-    'attachments' => count($body->getAttachments()),
+    'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
+    'attachments' => count($mail->getAttachments()),
 ];
 
 $statusCode = 200;
