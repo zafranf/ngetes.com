@@ -61,6 +61,7 @@ $params = [
     'deleted_read' => $deleted_read,
     'deleted_unread' => $deleted_unread,
     'deleted_total' => $deleted,
+    'job' => 'delete',
     'executed_time' => $execute_time,
     'finished_time' => $finish_time,
     'created_at' => date("Y-m-d H:i:s"),
