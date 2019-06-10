@@ -22,7 +22,6 @@ $_SESSION['email_name'] = _post('email_name');
 $table = db()->table('names');
 $q = $table->where('name', $name)->where('via', $path);
 $find = $q->first();
-
 if (!$find) {
     $save = $table->insert([
         'name' => $name,
