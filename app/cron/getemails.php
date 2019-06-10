@@ -8,14 +8,23 @@ $username = config('imap')['username'];
 $password = config('imap')['password'];
 
 $execute_time = date("Y-m-d H:i:s");
+$read = 0;
+$unread = 0;
 $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 
 $ids = $mailbox->searchMailbox('ALL');
 if (!empty($ids)) {
     foreach ($ids as $id) {
+        $info = $mailbox->getMailsInfo([$id])[0];
+        $is_read = $info->seen;
+        if ($is_read) {
+            $read++;
+        } else {
+            $unread++;
+        }
+
         $exists = db()->table('emails')->where('id', $id)->first();
         if (!$exists) {
-            $info = $mailbox->getMailsInfo([$id])[0];
             $mail = $mailbox->getMail($id, false);
             // debug($info, $mail);
 
@@ -42,6 +51,7 @@ if (!empty($ids)) {
 
             $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
             $content = preg_replace('/\ class="(.*?)"/', "", $content);
+            $content = str_replace(['<body>', '</body>'], "", $content);
 
             $is_plain = empty($mail->textPlain) && !empty($content);
 
@@ -78,8 +88,8 @@ $finish_time = date("Y-m-d H:i:s");
 
 $params = [
     'messages' => count($ids),
-    'read' => 0,
-    'unread' => count($ids),
+    'read' => $read,
+    'unread' => $unread,
     'deleted_read' => 0,
     'deleted_unread' => 0,
     'deleted_total' => 0,

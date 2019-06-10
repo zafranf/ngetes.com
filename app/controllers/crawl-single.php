@@ -71,6 +71,7 @@ if ($bodyContent && $bodyContent->length > 0) {
 
 $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
 $content = preg_replace('/\ class="(.*?)"/', "", $content);
+$content = str_replace(['<body>', '</body>'], "", $content);
 
 $data = [
     'id' => $mail->id,
