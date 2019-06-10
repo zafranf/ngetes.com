@@ -57,8 +57,8 @@ $doc = new \DOMDocument('1.0', 'UTF-8');
 @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 $links = $doc->getElementsByTagName('a');
 foreach ($links as $link) {
-    $href = $link->getAttribute('href');
-    $link->setAttribute('href', url($href));
+    // $href = $link->getAttribute('href');
+    // $link->setAttribute('href', url($href));
     $link->setAttribute('target', '_blank');
 }
 
