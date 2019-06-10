@@ -52,7 +52,7 @@ include 'header.php';
     var loading_time;
 
     function backToInbox() {
-      location.href = '<?=url('/inbox?name=' . $name)?>';
+      location.href = '<?=url('/inbox/' . $name)?>';
     }
 
     /**
@@ -86,7 +86,7 @@ include 'header.php';
       load.innerHTML = span;
 
       loading_time = setTimeout(function() {
-        n = (n==0)? n+1 : n+2;
+        n = (n==0) ? n+1 : n+2;
         loading(n);
       }, 500);
     }
@@ -105,7 +105,7 @@ include 'header.php';
         html += '<td width="156" style="border-left:0;text-align:right;">'+mail.date+'<br><small>'+attachments+' lampiran</small></td>';
         html += '</tr>';
         html += '<tr>';
-        html += '<td colspan="2" id="content">'+content+'</td>';
+        html += '<td colspan="2" id="content" style="padding:0;">'+content+'</td>';
         html += '</tr>';
 
         let tbody = document.getElementsByTagName('tbody')[0];
