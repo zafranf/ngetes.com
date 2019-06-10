@@ -49,6 +49,7 @@ foreach ($mails as $n => $mail) {
 
 if (!empty($deleteIds)) {
     $mailbox->imap('mail_move', [implode(',', $deleteIds), '[Gmail]/Trash', CP_UID]);
+    $mailbox->expungeDeletedMails();
 }
 
 $mailbox->disconnect();
