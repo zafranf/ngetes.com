@@ -52,7 +52,7 @@ include 'header.php';
     var loading_time;
 
     function backToInbox() {
-      location.href = '<?=url('/inbox?name=' . $name)?>';
+      location.href = '<?=url('/inbox/' . $name)?>';
     }
 
     /**
