@@ -14,7 +14,7 @@ include 'header.php';
       <div class="content">
         <h1>Inbox email</h1>
         <?php generateFlashMessages();?>
-        <p>Mau nyobain kirim email dari aplikasi tapi gak mau nyepam ke email pribadi? monggo ketik nama emailnya di sini biar bisa pake <b>&lt;nama&gt;@ngetes.com</b>..</p>
+        <p>Mau nyobain kirim email dari aplikasi tapi gak mau nyepam ke email pribadi? Monggo ketik nama emailnya di sini biar bisa pake <b>&lt;nama&gt;@ngetes.com</b>..</p>
         <form id="form-email" action="<?=url('/inbox-open')?>" method="post">
           <div class="field has-addons">
             <p class="control">
