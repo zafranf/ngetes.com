@@ -4,8 +4,6 @@ if (_server('REQUEST_METHOD') != 'POST') {
 }
 
 $name = strtolower(_post('email_name'));
-// $_POST['email'] = $name; // . '@ngetes.com';
-// unset($_POST['email_name']);
 $path = rtrim(parse_url(_server('HTTP_REFERER'))['path'], '/');
 activityLog('open inbox via ' . $path);
 
@@ -17,9 +15,6 @@ $valid = validation([
     'aliases' => [
         'email_name' => 'Email',
     ],
-    /* 'messages' => [
-    'regex' => 'etdah salah',
-    ], */
     'redirect' => $path ?? url('/'),
 ]);
 $_SESSION['email_name'] = _post('email_name');
@@ -38,6 +33,7 @@ if (!$find) {
 } else {
     $save = $q->update([
         'count' => db()->raw('count+1'),
+        'updated_at' => date("Y-m-d H:i:s"),
     ]);
 }
 
