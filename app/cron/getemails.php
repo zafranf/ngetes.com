@@ -60,9 +60,8 @@ if (!empty($ids)) {
                 'id' => $mail->id,
                 'message_id' => str_replace(['<', '>'], "", $mail->messageId),
                 'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
-                'from' => json_encode([
-                    $mail->fromAddress => $mail->fromName,
-                ]),
+                'from_name' => $mail->fromName,
+                'from_email' => $mail->fromAddress,
                 'to' => json_encode($mail->to),
                 'cc' => json_encode($mail->cc),
                 'bcc' => json_encode($mail->bcc),
