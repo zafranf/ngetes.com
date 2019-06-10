@@ -166,9 +166,13 @@ include 'header.php';
       let html = '';
       if (data.length) {
         data.forEach((mail, n) => {
+          let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+          if (typeof sender == 'undefined') {
+            sender = mail.from;
+          }
           let read = mail.read ? 'read' : 'unread';
           html += '<tr onclick="location.href=\'<?=url('/inbox/')?>'+name+'/mail/'+mail.id+'\'" class="'+read+'">';
-          html += '<td><div>'+mail.from+'<br>'+ mail.subject +'</div></td>';
+          html += '<td><div>'+sender+'<br>'+ mail.subject +'</div></td>';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
         });

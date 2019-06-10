@@ -105,7 +105,7 @@ include 'header.php';
         html += '<td width="156" style="border-left:0;text-align:right;">'+mail.date+'<br><small>'+attachments+' lampiran</small></td>';
         html += '</tr>';
         html += '<tr>';
-        html += '<td colspan="2" id="content" style="padding:0;">'+content+'</td>';
+        html += '<td colspan="2" id="content">'+content+'</td>';
         html += '</tr>';
 
         let tbody = document.getElementsByTagName('tbody')[0];
