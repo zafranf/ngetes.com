@@ -41,6 +41,7 @@ $ids = $mailbox->searchMailbox('TO "' . _post('name') . '@ngetes.com"');
 if (!in_array(_post('id'), $ids)) {
     $statusCode = 404;
     $response['message'] = 'mail not found';
+
     return response($response, $statusCode);
 }
 
