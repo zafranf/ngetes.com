@@ -49,6 +49,7 @@ include 'header.php';
 
           <div class="field">
             <div class="control">
+              <p><small class="note">* kolom yang pake tanda bintang berarti wajib diisi yaa..</small></p>
               <label class="checkbox">
                 <input type="checkbox" name="thankyou" checked>
                 Terima kasih.

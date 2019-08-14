@@ -31,7 +31,7 @@ include 'header.php';
           </div>
         </form>
         <p>
-          <small class="small">*catet, penting nih:</small><br>
+          <small class="note">* catet, penting nih:</small><br>
           <code><small>inboxnya untuk umum, jadi siapapun bisa pake nama yang sama.</small></code>
         </p>
       </div>
