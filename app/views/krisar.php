@@ -40,7 +40,7 @@ include 'header.php';
             </div>
           </div>
 
-          <div class="field">
+          <div class="field" style="margin-top:.75rem">
             <label class="label">Ingin menyampaikan bahwa:</label>
             <div class="control">
               <textarea name="message" class="textarea" placeholder="pesan..*" onblur="checkMessage(this)"></textarea>
