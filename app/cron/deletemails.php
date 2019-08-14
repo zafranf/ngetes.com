@@ -56,7 +56,7 @@ if (!empty($ids)) {
                 ]);
             }
 
-            $mailbox->moveMail($mail->id, '[Gmail]/Trash');
+            $mailbox->moveMail($mail->uid, '[Gmail]/Trash');
         }
     }
 
