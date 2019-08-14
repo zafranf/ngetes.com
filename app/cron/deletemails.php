@@ -9,7 +9,7 @@ $username = config('imap')['username'];
 $password = config('imap')['password'];
 
 $execute_time = date("Y-m-d H:i:s");
-$min20menit = strtotime('-20 minutes');
+$min20menit = strtotime('-30 minutes');
 $min60menit = strtotime('-60 minutes');
 $tomorrow = date("Y-m-d", strtotime('+1 day'));
 $deleted = 0;
