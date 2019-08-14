@@ -52,6 +52,7 @@ if (!empty($ids)) {
 
             $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
             $content = preg_replace('/\ class="(.*?)"/', "", $content);
+            $content = preg_replace('/\ id="(.*?)"/', "", $content);
             $content = str_replace(['<body>', '</body>'], "", $content);
 
             $is_plain = empty($mail->textPlain) && !empty($content);
@@ -79,7 +80,7 @@ if (!empty($ids)) {
             ];
             db()->table('emails')->insert($data);
 
-            $mailbox->moveMail($mail->id, '[Gmail]/Trash');
+            // $mailbox->moveMail($mail->id, '[Gmail]/Trash');
         }
     }
 }

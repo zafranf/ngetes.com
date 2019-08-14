@@ -73,7 +73,7 @@ include 'header.php';
             <thead>
               <tr>
                 <th>Email</th>
-                <th width="96">Tanggal</th>
+                <th width="90">Tanggal</th>
               </tr>
             </thead>
             <tbody>
@@ -166,13 +166,13 @@ include 'header.php';
       let html = '';
       if (data.length) {
         data.forEach((mail, n) => {
-          let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
+          /* let sender = mail.from.name ? mail.from.name + ' ('+mail.from.email+')' : mail.from.email;
           if (typeof sender == 'undefined') {
             sender = mail.from;
-          }
+          } */
           let read = mail.read ? 'read' : 'unread';
           html += '<tr onclick="location.href=\'<?=url('/inbox/')?>'+name+'/mail/'+mail.id+'\'" class="'+read+'">';
-          html += '<td><div>'+sender+'<br>'+ mail.subject +'</div></td>';
+          html += '<td><div>'+ mail.subject +'<br><small>'+mail.from+'</small></div></td>';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
         });
@@ -186,7 +186,7 @@ include 'header.php';
 
       if (name.length) {
         let request = new XMLHttpRequest();
-        request.open('POST', '<?=url('/crawl')?>', true);
+        request.open('POST', '<?=url('/email/fetch')?>', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
         request.onload = function() {
