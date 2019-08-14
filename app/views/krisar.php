@@ -5,9 +5,9 @@ $description = 'Kasih kritik dan saran buat pengembangan ngetes.com lebih lanjut
 include 'header.php';
 ?>
   <div class="tab-content">
-    <div class="tab-pane is-active" id="krisar" style="overflow-y:hidden">
+    <div class="tab-pane is-active" id="krisar" style="overflow:hidden">
       <div class="content">
-        <h1>Kritik? Saran? Kritik & saran? sok atuh isi formulir..</h1>
+        <h1>Kritik? Saran? Kritik & saran? Sok atuh isi formulir..</h1>
         <?php generateFlashMessages();?>
         <form id="form-krisar" action="<?=url('/krisar-save')?>" method="post">
           <div class="field">
@@ -40,7 +40,7 @@ include 'header.php';
             </div>
           </div>
 
-          <div class="field">
+          <div class="field" style="margin-top:.75rem">
             <label class="label">Ingin menyampaikan bahwa:</label>
             <div class="control">
               <textarea name="message" class="textarea" placeholder="pesan..*" onblur="checkMessage(this)"></textarea>
@@ -49,6 +49,7 @@ include 'header.php';
 
           <div class="field">
             <div class="control">
+              <p><small class="note">* kolom yang pake tanda bintang berarti wajib diisi yaa..</small></p>
               <label class="checkbox">
                 <input type="checkbox" name="thankyou" checked>
                 Terima kasih.
