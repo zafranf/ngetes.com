@@ -7,7 +7,7 @@ include 'header.php';
   <div class="tab-content">
     <div class="tab-pane is-active" id="krisar" style="overflow:hidden">
       <div class="content">
-        <h1>Kritik? Saran? Kritik & saran? sok atuh isi formulir..</h1>
+        <h1>Kritik? Saran? Kritik & saran? Sok atuh isi formulir..</h1>
         <?php generateFlashMessages();?>
         <form id="form-krisar" action="<?=url('/krisar-save')?>" method="post">
           <div class="field">
