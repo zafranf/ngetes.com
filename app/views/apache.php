@@ -16,7 +16,7 @@ include 'header.php';
             &lt;/VirtualHost&gt;
           </pre>
         </p>
-        <p><small class="small">*tutorial lengkapnya googling aja yaa di youtube 😜</small></p>
+        <p><small class="note">* tutorial lengkapnya googling aja yaa di youtube 😜</small></p>
       </div>
     </div>
   </div>

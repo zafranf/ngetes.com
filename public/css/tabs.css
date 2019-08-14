@@ -48,8 +48,9 @@ code {
     margin: 0 auto;
 }
 
-small.small {
+small.note {
     font-size: small;
+    color: #555;
 }
 
 pre {

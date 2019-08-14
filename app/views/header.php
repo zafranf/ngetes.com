@@ -50,32 +50,32 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
       <ul>
         <li data-target="tentang" id="li-tentang" <?=$path == 'tentang' || $path == '' ? $active : '';?>>
             <a href="<?=url('/tentang')?>">
-            <span>Tentang</span>
+              <span>Tentang</span>
             </a>
         </li>
         <li data-target="apache" id="li-apache" <?=$path == 'apache' ? $active : '';?>>
             <a href="<?=url('/apache')?>">
-            <span>Apache</span>
+              <span>Apache</span>
             </a>
         </li>
         <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
             <a href="<?=url('/nginx')?>">
-            <span>Nginx</span>
+              <span>Nginx</span>
             </a>
         </li>
         <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
             <a href="<?=url('/email')?>">
-            <span>Email</span>
+              <span>Email</span>
             </a>
         </li>
         <li data-target="krisar" id="li-krisar" <?=$path == 'krisar' ? $active : '';?>>
             <a href="<?=url('/krisar')?>">
-            <span>Krisar</span>
+              <span>Krisar</span>
             </a>
         </li>
         <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?> class="is-hidden">
-            <a href="<?=url('/bantu-tes')?>">
-            <span>Bantu ngetes?</span>
+            <a href="<?=url('/bantu-tes')?>" rel="nofollow">
+              <span>Bantu ngetes?</span>
             </a>
         </li>
       </ul>
