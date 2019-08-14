@@ -113,7 +113,7 @@ include 'header.php';
       }
     }
 
-    function crawlEmail() {
+    function fetchEmail() {
       loading();
 
       let id = parseInt('<?=$id?>');
@@ -149,7 +149,7 @@ include 'header.php';
       }
     }
 
-    crawlEmail();
+    fetchEmail();
     if (localStorage.the_emails) {
       let data = JSON.parse(localStorage.the_emails);
       let email = data[getIndexOfK(data, 'id', <?=$id?>)];
