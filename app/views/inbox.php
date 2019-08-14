@@ -94,7 +94,7 @@ include 'header.php';
             Catetan:<br>
             - <b>data</b> 30 email terakhir diambil tiap menit<br>
             - <b>unread</b> dihapus tiap 60 menit<br>
-            - <b>read</b> dihapus tiap 20 menit<br>
+            - <b>read</b> dihapus tiap 30 menit<br>
             - <b>tanpa</b> file lampiran<br>
           </small>
         </p>
@@ -103,12 +103,13 @@ include 'header.php';
   </div>
   <script>
     <?php if ($name) {?>
-    var name = '<?=$name?>';
+    let name = '<?=$name?>';
     <?php } else {?>
-    var name = localStorage.email_name;
+    let name = localStorage.email_name;
     <?php }?>
     let token = '<?=generateToken(($name ?? _session('email_name')) . _session('token_time'))?>';
-    var is_loading = false;
+    let is_loading = false;
+    let repeat = 0;
 
     let formEmail = document.getElementById('form-email');
     formEmail.addEventListener('submit', function(e) {
@@ -125,7 +126,7 @@ include 'header.php';
           console.log('masih loading kak, sabar ya 😉');
           return;
         } else {
-          crawlEmails();
+          fetchEmails();
         }
       } */
 
@@ -163,6 +164,7 @@ include 'header.php';
     }
 
     function generateEmails(data) {
+      let tbody = document.getElementsByTagName('tbody')[0];
       let html = '';
       if (data.length) {
         data.forEach((mail, n) => {
@@ -176,12 +178,21 @@ include 'header.php';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
         });
-        let tbody = document.getElementsByTagName('tbody')[0];
         tbody.innerHTML = html;
+      } else {
+        if (repeat == 1) {
+          let html = '<tr>'+
+                '<td colspan="2" style="text-align:center">'+
+                  'Masih kosong. Coba kirim email ke <u><a href="mailto:<?=($name ?? _session('email_name'))?>@ngetes.com"><?=($name ?? _session('email_name'))?>@ngetes.com</a></u>.'+
+                '</td>'+
+              '</tr>';
+          tbody.innerHTML = html;
+        }
       }
     }
 
-    function crawlEmails() {
+    function fetchEmails() {
+      repeat++;
       loading();
 
       if (name.length) {
@@ -203,13 +214,13 @@ include 'header.php';
             localStorage.setItem('email_name', name);
             localStorage.setItem("the_emails", JSON.stringify(data));
             setTimeout(function() {
-              crawlEmails();
+              fetchEmails();
             }, 1000 * 60);
           } else {
             // We reached our target server, but it returned an error
             loading(false);
             setTimeout(function() {
-              crawlEmails();
+              fetchEmails();
             }, 1000 * 60);
           }
         };
@@ -218,7 +229,7 @@ include 'header.php';
           // There was a connection error of some sort
           loading(false);
           setTimeout(function() {
-            crawlEmails();
+            fetchEmails();
           }, 1000 * 60);
         };
 
@@ -226,7 +237,7 @@ include 'header.php';
       }
     }
 
-    crawlEmails();
+    fetchEmails();
     if (localStorage.the_emails && localStorage.email_name == name) {
       let data = JSON.parse(localStorage.the_emails);
       generateEmails(data);
