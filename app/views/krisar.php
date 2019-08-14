@@ -5,7 +5,7 @@ $description = 'Kasih kritik dan saran buat pengembangan ngetes.com lebih lanjut
 include 'header.php';
 ?>
   <div class="tab-content">
-    <div class="tab-pane is-active" id="krisar" style="overflow-y:hidden">
+    <div class="tab-pane is-active" id="krisar" style="overflow:hidden">
       <div class="content">
         <h1>Kritik? Saran? Kritik & saran? sok atuh isi formulir..</h1>
         <?php generateFlashMessages();?>
