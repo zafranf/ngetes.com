@@ -34,21 +34,21 @@ $username = config('imap')['username'];
 $password = config('imap')['password'];
 
 // Construct the $mailbox handle
-/* $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
+$mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 
-// Get INBOX emails after date 2017-01-01
+// Get INBOX emails
 $ids = $mailbox->searchMailbox('TO "' . _post('name') . '@ngetes.com"');
 if (!in_array(_post('id'), $ids)) {
-$statusCode = 404;
-$response['message'] = 'mail not found';
+    $statusCode = 404;
+    $response['message'] = 'Mail not found';
 
-return response($response, $statusCode);
+    return response($response, $statusCode);
 }
 
 $mail = $mailbox->getMail(_post('id'));
-$mailbox->disconnect(); */
+$mailbox->disconnect();
 
-/* $content = $mail->textHtml ?? nl2br($mail->textPlain);
+$content = $mail->textHtml ?? nl2br($mail->textPlain);
 $content = trim($content);
 
 $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
@@ -58,45 +58,47 @@ $doc = new \DOMDocument('1.0', 'UTF-8');
 @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 $links = $doc->getElementsByTagName('a');
 foreach ($links as $link) {
-$link->setAttribute('target', '_blank');
+    $link->setAttribute('target', '_blank');
 }
 
 $bodyContent = $doc->getElementsByTagName('body');
 if ($bodyContent && $bodyContent->length > 0) {
-$bodyContent = $bodyContent->item(0);
-$content = $doc->saveHTML($bodyContent);
+    $bodyContent = $bodyContent->item(0);
+    $content = $doc->saveHTML($bodyContent);
 } else {
-$content = $doc->saveHTML();
+    $content = $doc->saveHTML();
 }
 
 $content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
 $content = preg_replace('/\ class="(.*?)"/', "", $content);
-$content = str_replace(['<body>', '</body>'], "", $content); */
+$content = preg_replace('/\ id="(.*?)"/', "", $content);
+$content = str_replace(['<body>', '</body>'], "", $content);
 
 $table = db()->table('emails');
 $q = $table->where('id', _post('id'))->where('is_deleted', 0);
-$mail = $q->first();
-if (!$mail) {
-    $statusCode = 404;
-    $response['message'] = 'mail not found';
-
-    return response($response, $statusCode);
-}
+$qmail = $q->first();
+/* if ($qmail) {
 $q->update([
-    'is_read' => 1,
-    'updated_at' => date("Y-m-d H:i:s"),
+'is_read' => 1,
+'updated_at' => date("Y-m-d H:i:s"),
 ]);
+} else {
+$statusCode = 404;
+$response['message'] = 'Mail not found';
+
+return response($response, $statusCode);
+} */
 
 $data = [
     'id' => $mail->id,
     'subject' => $mail->subject ?? '[no-subject]',
-    'content' => $mail->html ?? $mail->text,
+    'content' => $content,
     'from' => [
-        'name' => $mail->from_name ?? '',
-        'email' => $mail->from_email ?? '',
+        'name' => $mail->fromName ?? '',
+        'email' => $mail->fromAddress ?? '',
     ],
     'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
-    'attachments' => $mail->attachments,
+    'attachments' => count($mail->getAttachments()),
 ];
 
 $statusCode = 200;

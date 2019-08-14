@@ -4,7 +4,7 @@ require_once dirname(__DIR__) . '/../public/index.php';
 
 /* connect to gmail */
 $hostname = config('imap')['hostname'];
-$hostname = str_replace("INBOX", '[Gmail]/Trash', $hostname);
+// $hostname = str_replace("INBOX", '[Gmail]/Trash', $hostname);
 $username = config('imap')['username'];
 $password = config('imap')['password'];
 
@@ -37,7 +37,7 @@ if (!empty($ids)) {
         $delete_read = $is_read && ($mailtime <= $min20menit);
         $delete_unread = !$is_read && ($mailtime <= $min60menit);
         if ($delete_read || $delete_unread) {
-            $mailbox->deleteMail($mail->uid);
+            // $mailbox->deleteMail($mail->uid);
 
             $deleted++;
             if ($is_read) {
@@ -55,6 +55,8 @@ if (!empty($ids)) {
                     'is_deleted' => 1,
                 ]);
             }
+
+            $mailbox->moveMail($mail->id, '[Gmail]/Trash');
         }
     }
 

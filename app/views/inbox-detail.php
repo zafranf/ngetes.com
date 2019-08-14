@@ -105,7 +105,7 @@ include 'header.php';
         html += '<td width="156" style="border-left:0;text-align:right;">'+mail.date+'<br><small>'+attachments+' lampiran</small></td>';
         html += '</tr>';
         html += '<tr>';
-        html += '<td colspan="2" id="content">'+content+'</td>';
+        html += '<td colspan="2" id="content" style="padding:0">'+content+'</td>';
         html += '</tr>';
 
         let tbody = document.getElementsByTagName('tbody')[0];
@@ -119,7 +119,7 @@ include 'header.php';
       let id = parseInt('<?=$id?>');
       if (name.length && id > 0) {
         let request = new XMLHttpRequest();
-        request.open('POST', '<?=url('/crawl/single')?>', true);
+        request.open('POST', '<?=url('/email/fetch/single')?>', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
         request.onload = function() {
