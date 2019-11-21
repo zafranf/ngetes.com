@@ -1,2 +1,2 @@
 <?php
-debug(_input());
+_log(_input());
