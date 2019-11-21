@@ -5,7 +5,7 @@
     "require": {
         "php-imap/php-imap": "^3.0",
         "tijsverkoyen/css-to-inline-styles": "^2.2",
-        "zafranf/fnfwcore": "dev-master"
+        "zafranf/fnfwcore": "^0.0"
     },
     "license": "MIT",
     "authors": [{
