@@ -107,6 +107,7 @@ $data = [
     ],
     'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
     'attachments' => $mail->attachment_count,
+    'spam' => $mail->is_spam,
 ];
 
 $statusCode = 200;

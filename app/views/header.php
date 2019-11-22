@@ -53,12 +53,17 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
               <span>Tentang</span>
             </a>
         </li>
-        <li data-target="apache" id="li-apache" <?=$path == 'apache' ? $active : '';?>>
-            <a href="<?=url('/apache')?>">
+        <li data-target="localhost" id="li-localhost" <?=$path == 'localhost' ? $active : '';?>>
+            <a href="<?=url('/localhost')?>">
               <span>Localhost</span>
             </a>
         </li>
-        <!-- <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
+        <!-- <li data-target="apach" id="li-apach" <?=$path == 'apach' ? $active : '';?>>
+            <a href="<?=url('/apach')?>">
+              <span>Apache</span>
+            </a>
+        </li>
+        <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
             <a href="<?=url('/nginx')?>">
               <span>Nginx</span>
             </a>

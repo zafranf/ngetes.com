@@ -41,7 +41,7 @@ include 'header.php';
     }
     #table-email tr.spam td div {
       padding-left: 3px;
-      border-left: 2px solid #f56060;
+      border-left: 2px solid #ff3860;
     }
     #table-email tr.read {
       font-weight: 300;
@@ -227,7 +227,7 @@ include 'header.php';
             loading(false);
             let tbody = document.getElementsByTagName('tbody')[0];
             let html = '<tr>'+
-                  '<td colspan="2" style="text-align:center;color:#f56060">'+
+                  '<td colspan="2" style="text-align:center;color:#ff3860">'+
                     res.message+
                   '</td>'+
                 '</tr>';
