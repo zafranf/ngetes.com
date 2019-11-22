@@ -1,19 +1,19 @@
 <?php
 
-function generateFlashMessages()
+/* function generateFlashMessages()
 {
-    if (checkFlashMessages()) {
-        echo '<div class="notification">';
-        $messages = getFlashMessages();
-        foreach ($messages as $key => $message) {
-            $class = $messages['type_message'] == 'failed' ? 'has-text-danger' : 'has-text-link';
-            if ($key != 'type_message') {
-                echo '<span class="' . $class . '"><small>' . $message . '</small></span><br>';
-            }
-        }
-        echo '</div>';
-    }
+if (checkFlashMessages()) {
+echo '<div class="notification">';
+$messages = getFlashMessages();
+foreach ($messages as $key => $message) {
+$class = $messages['type_message'] == 'failed' ? 'has-text-danger' : 'has-text-link';
+if ($key != 'type_message') {
+echo '<span class="' . $class . '"><small>' . $message . '</small></span><br>';
 }
+}
+echo '</div>';
+}
+} */
 
 function validateCaptcha($response)
 {
