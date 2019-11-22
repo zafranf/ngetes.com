@@ -8,8 +8,8 @@ include 'header.php';
     <div class="tab-pane is-active" id="apache">
       <div class="content">
 
-        <h1>Localhost</h1>
-        <p>Subdomain langsung ngarah ke localhost, semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian lah. Soalnya subdomain-nya langsung ngarah ke folder. Kalo gak ada, bisa diatur kayak gini:</p>
+        <h1>Subdomain</h1>
+        <p>Subdomain langsung ngarah ke localhost (127.0.0.1). Semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian lah. <!-- Soalnya subdomain-nya langsung ngarah ke folder.  -->Kalo gak ada, bisa diatur kayak gini:</p>
         <p>misal sebelumnya kayak gini,</p>
         <pre>
           /gratis

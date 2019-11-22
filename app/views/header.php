@@ -53,9 +53,9 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
               <span>Tentang</span>
             </a>
         </li>
-        <li data-target="localhost" id="li-localhost" <?=$path == 'localhost' ? $active : '';?>>
-            <a href="<?=url('/localhost')?>">
-              <span>Localhost</span>
+        <li data-target="subdomain" id="li-subdomain" <?=$path == 'subdomain' ? $active : '';?>>
+            <a href="<?=url('/subdomain')?>">
+              <span>Subdomain</span>
             </a>
         </li>
         <!-- <li data-target="apach" id="li-apach" <?=$path == 'apach' ? $active : '';?>>
