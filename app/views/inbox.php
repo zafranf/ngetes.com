@@ -37,7 +37,11 @@ include 'header.php';
     }
     #table-email tr.unread td div {
       padding-left: 3px;
-      border-left:5px solid #369cee;
+      border-left: 5px solid #369cee;
+    }
+    #table-email tr.spam td div {
+      padding-left: 3px;
+      border-left: 2px solid #f56060;
     }
     #table-email tr.read {
       font-weight: 300;
@@ -110,6 +114,7 @@ include 'header.php';
     let token = '<?=generateToken(($name ?? _session('email_name')) . _session('token_time'))?>';
     let is_loading = false;
     let repeat = 0;
+    let name_session = '<?=($name ?? _session('email_name'))?>';
 
     let formEmail = document.getElementById('form-email');
     formEmail.addEventListener('submit', function(e) {
@@ -173,7 +178,8 @@ include 'header.php';
             sender = mail.from;
           } */
           let read = mail.read ? 'read' : 'unread';
-          html += '<tr onclick="location.href=\'<?=url('/inbox/')?>'+name+'/mail/'+mail.id+'\'" class="'+read+'">';
+          let spam = mail.spam ? ' spam' : '';
+          html += '<tr onclick="location.href=\'/inbox/'+name+'/mail/'+mail.id+'\'" class="'+read+spam+'">';
           html += '<td><div>'+ mail.subject +'<br><small>'+mail.from+'</small></div></td>';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
@@ -183,7 +189,7 @@ include 'header.php';
         if (repeat == 1) {
           let html = '<tr>'+
                 '<td colspan="2" style="text-align:center">'+
-                  'Masih kosong. Coba kirim email ke <u><a href="mailto:<?=($name ?? _session('email_name'))?>@ngetes.com"><?=($name ?? _session('email_name'))?>@ngetes.com</a></u>.'+
+                  'Masih kosong. Coba kirim email ke <u><a href="mailto:'+name_session+'@ngetes.com">'+name_session+'@ngetes.com</a></u>.'+
                 '</td>'+
               '</tr>';
           tbody.innerHTML = html;
@@ -197,7 +203,7 @@ include 'header.php';
 
       if (name.length) {
         let request = new XMLHttpRequest();
-        request.open('POST', '<?=url('/email/fetch')?>', true);
+        request.open('POST', '/email/fetch', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
         request.onload = function() {

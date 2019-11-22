@@ -31,27 +31,29 @@ $valid = validation([
 ]);
 
 /* connect to gmail */
-$hostname = config('imap')['hostname'];
-$username = config('imap')['username'];
-$password = config('imap')['password'];
+// $hostname = config('imap')['hostname'];
+// $username = config('imap')['username'];
+// $password = config('imap')['password'];
 
 // Construct the $mailbox handle
-$mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
+/* $mailbox = new \PhpImap\Mailbox($hostname, $username, $password);
 $ids = $mailbox->searchMailbox('TO "' . _post('name') . '@ngetes.com"');
 rsort($ids);
 array_splice($ids, config('imap')['limit']);
 
 $mails = $mailbox->getMailsInfo($ids);
-$mailbox->disconnect();
+$mailbox->disconnect(); */
 
-// $mails = db()->table('emails')->where('to', 'like', '%' . _post('name') . '@ngetes.com%')->where('is_deleted', 0)->get();
+$mails = db()->table('emails')->where('to', 'like', '%' . _post('name') . '@ngetes.com%')->where('is_deleted', 0)->get();
 foreach ($mails as $mail) {
+    $from = $mail->from_name . ' <' . $mail->from_email . '>';
     $data[] = [
-        'id' => $mail->uid,
+        'id' => $mail->id,
         'subject' => $mail->subject ?? '[no-subject]',
-        'from' => str_replace(['<', '>', '"'], ['(', ')', ''], $mail->from),
+        'from' => str_replace(['<', '>', '"'], ['(', ')', ''], $from),
         'date' => date("Y-m-d H:i:s", strtotime($mail->date)),
-        'read' => (int) $mail->seen,
+        'read' => (int) $mail->is_read,
+        'spam' => (int) $mail->is_spam,
     ];
 }
 
