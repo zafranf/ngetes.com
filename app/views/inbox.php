@@ -207,10 +207,10 @@ include 'header.php';
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
         request.onload = function() {
+          let res = JSON.parse(request.responseText);
+          // console.log(res);
           if (request.status >= 200 && request.status < 400) {
             // Success!
-            let res = JSON.parse(request.responseText);
-            // console.log(res);
             let data = res.data;
             if (data.length > 0) {
               generateEmails(data);
@@ -225,13 +225,21 @@ include 'header.php';
           } else {
             // We reached our target server, but it returned an error
             loading(false);
+            let tbody = document.getElementsByTagName('tbody')[0];
+            let html = '<tr>'+
+                  '<td colspan="2" style="text-align:center;color:#f56060">'+
+                    res.message+
+                  '</td>'+
+                '</tr>';
+            tbody.innerHTML = html;
+
             setTimeout(function() {
               fetchEmails();
             }, 1000 * 60);
           }
         };
 
-        request.onerror = function() {
+        request.onerror = function(err) {
           // There was a connection error of some sort
           loading(false);
           setTimeout(function() {

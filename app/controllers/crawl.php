@@ -16,7 +16,18 @@ if ($token != _post('token')) {
     $statusCode = 403;
     $response = [
         'status' => false,
-        'message' => 'forbidden access',
+        'message' => 'Nah, lho mau ngapain? 🤔',
+    ];
+
+    return response($response, $statusCode);
+}
+
+$private = ['admin', 'bantu', 'sosmed', 'tukang', 'janganbales'];
+if (in_array(_post('name'), $private)) {
+    $statusCode = 403;
+    $response = [
+        'status' => false,
+        'message' => 'Jangan yang ini. Privasi ini mah. Yang lain gih! 😝',
     ];
 
     return response($response, $statusCode);
@@ -25,7 +36,16 @@ if ($token != _post('token')) {
 $valid = validation([
     'requests' => _post(),
     'rules' => [
-        'name' => 'required|regex:/^[a-zA-Z0-9_.]*$/',
+        // 'name' => 'required|regex:/^[a-zA-Z0-9_.]*$/',
+        'name' => [
+            'required',
+            'regex:/^[a-zA-Z-0-9_.]*$/',
+            function ($value) {
+                $private = ['admin', 'bantu', 'sosmed', 'tukang', 'janganbales'];
+
+                return !in_array($value, $private);
+            },
+        ],
         'token' => 'required',
     ],
 ]);
