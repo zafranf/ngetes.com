@@ -4,34 +4,6 @@
       <div class="content">
           <h1>Duh,</h1>
           <p>apa ya? Udah ada di slogan sih. 😜 <!-- Pake aja deh, gratis. Serius. --></p>
-          <hr>
-          <small>
-            <p>Hehehe,</p>
-            <p>Itu yang utamanya sih, buat ngetes aplikasi localhost pake domain beneran. Berguna banget buat yang mau develop aplikasi di localhost pake API pihak ketiga tapi butuh domain asli. Ada juga buat ngetes kiriman email. Biar gak nyepam email pribadi. Ntaps kan? 😉👍</p>
-            <p>Kalo mau pake yang subdomain, semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian. Soalnya subdomain-nya langsung ngarah ke folder. Kalo gak ada, bisa diatur kayak gini:</p>
-            <p>misal sebelumnya kayak gini,</p>
-            <pre>
-              /gratis
-                ├── css
-                |<?=spaces(3)?>└── app.css
-                ├── js
-                |<?=spaces(3)?>└── app.js
-                └── index.php
-            </pre>
-            <p>trus diubah jadi kayak gini,</p>
-            <pre>
-              /gratis
-                └── public
-                <?=spaces(4)?>├── css
-                <?=spaces(4)?>|<?=spaces(3)?>└── app.css
-                <?=spaces(4)?>├── js
-                <?=spaces(4)?>|<?=spaces(3)?>└── app.js
-                <?=spaces(4)?>└── index.php
-            </pre>
-            <p>jadi nanti aksesnya gini <code>http://gratis.ngetes.com</code>. Cara atur vhostnya ada di page sebelah.<br>
-            &raquo; <a title="atur virtual host apache" href="<?=url('/apache')?>" class="has-text-link">apache</a> | <a title="atur virtual host nginx" href="<?=url('/nginx')?>" class="has-text-link">nginx</a>.</p>
-            <p>Punya dan mau pake cara lain? Silakan, bebas kita mah. 😄</p>
-          </small>
       </div>
     </div>
   </div>

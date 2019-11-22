@@ -40,7 +40,7 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
             <b>ngetes.com</b>
           </h1>
           <h2 class="subtitle">
-            subdomain gratis buat <i>ngetes</i> aplikasi localhost
+            subdomain dan inbox email gratis buat <i>ngetes</i>
           </h2>
         </a>
       </div>
@@ -55,14 +55,14 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
         </li>
         <li data-target="apache" id="li-apache" <?=$path == 'apache' ? $active : '';?>>
             <a href="<?=url('/apache')?>">
-              <span>Apache</span>
+              <span>Localhost</span>
             </a>
         </li>
-        <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
+        <!-- <li data-target="nginx" id="li-nginx" <?=$path == 'nginx' ? $active : '';?>>
             <a href="<?=url('/nginx')?>">
               <span>Nginx</span>
             </a>
-        </li>
+        </li> -->
         <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
             <a href="<?=url('/email')?>">
               <span>Email</span>
