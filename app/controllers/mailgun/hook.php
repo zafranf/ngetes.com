@@ -1,2 +1,75 @@
 <?php
-_log([_input(), _files()]);
+include "helpers.php";
+
+/* set variable input */
+$r = _input();
+$files = _files();
+
+/* set variable */
+$to = $r['To'];
+$cc = $r['Cc'] ?? null;
+$from = $r['from'] ?? $r['From'];
+$from = parseFrom($from);
+$attachments = isset($r['attachment-count']) && $r['attachment-count'] > 0 ? processFiles(_files()) : [];
+
+/* set content */
+$content = $r['body-html'] ?? nl2br(trim($r['body-plain']));
+$content = trim($content);
+
+/* convert inline styles */
+$cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
+$html = $cssToInlineStyles->convert($content);
+
+/* add target link */
+$doc = new \DOMDocument('1.0', 'UTF-8');
+@$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+$links = $doc->getElementsByTagName('a');
+foreach ($links as $link) {
+    $link->setAttribute('target', '_blank');
+}
+
+/* save content */
+$bodyContent = $doc->getElementsByTagName('body');
+if ($bodyContent && $bodyContent->length > 0) {
+    $bodyContent = $bodyContent->item(0);
+    $content = $doc->saveHTML($bodyContent);
+} else {
+    $content = $doc->saveHTML();
+}
+
+/* clear tags */
+$content = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "", $content);
+$content = preg_replace('/\ class="(.*?)"/', "", $content);
+$content = preg_replace('/\ id="(.*?)"/', "", $content);
+$content = preg_replace('/\<body(.*?)>/', "", $content);
+$content = str_replace(['<body>', '</body>'], "", $content);
+
+/* check flag */
+$is_plain = empty($r['body-plain']) && !empty($content);
+$is_spam = isset($r['X-Mailgun-SFlag']) && bool($r['X-Mailgun-SFlag']) ? 1 : 0;
+
+$data = [
+    // 'id' => $mail->id,
+    'message_id' => str_replace(['<', '>'], "", $r['Message-Id']),
+    'date' => date("Y-m-d H:i:s", $r['timestamp']),
+    'sender' => $r['sender'] ?? $r['Sender'],
+    'from_name' => trim($from['name']),
+    'from_email' => $from['email'],
+    'to' => $to,
+    'cc' => $cc,
+    // 'bcc' => json_encode($mail->bcc),
+    'reply_to' => $r['Reply-To'] ?? null,
+    'subject' => $r['subject'] ?? $r['Subject'],
+    'text' => $is_plain ? strip_tags(trim($content)) : trim($r['body-plain']),
+    'html' => $content,
+    'attachment_count' => count($attachments),
+    'attachments' => json_encode($attachments),
+    'headers' => $r['message-headers'], //json_encode($r['message-headers']),
+    // 'headers_raw' => json_encode($r['message-headers']),
+    'size' => null,
+    'is_read' => 0,
+    'is_deleted' => 0,
+    'is_spam' => $is_spam,
+    'created_at' => date("Y-m-d H:i:s"),
+];
+db()->table('emails')->insert($data);
