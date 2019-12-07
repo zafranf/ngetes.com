@@ -30,10 +30,11 @@ include 'header.php';
             </p>
           </div>
         </form>
-        <p>
-          <small class="note">* catet, penting nih:</small><br>
-          <code><small>inboxnya untuk umum, jadi siapapun bisa pake nama yang sama.</small></code>
-        </p>
+        <p style="margin:0;"><small class="note">* catet, penting nih:</small></p>
+        <ul style="font-size:small;margin-top:0;">
+          <li><code>inboxnya untuk umum, jadi siapapun bisa pake nama yang sama.</code></li>
+          <!-- <li><code>mohon untuk gak dipake buat hal2 curang, ngejar promo pendaftar baru misalnya</code></li> -->
+        </ul>
       </div>
     </div>
   </div>

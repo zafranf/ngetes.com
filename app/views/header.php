@@ -3,11 +3,11 @@ $config = config();
 $path = str_replace("?" . _server('QUERY_STRING'), "", _server('REQUEST_URI'));
 $path = trim($path, '/');
 $active = 'class="is-active"';
-$title = isset($title) ? $title : 'Subdomain dan inbox email gratis';
+$title = isset($title) ? $title : 'Buat ngetes yang perlu dan bisa dites';
 $follow = isset($follow) ? $follow : true;
 $robots = $follow ? 'index, follow' : 'noindex, nofollow';
 $keywords = isset($keywords) ? $keywords : 'ngetes, ngetes aplikasi, coba aplikasi, aplikasi localhost, ngetes email, email gratis, subdomain gratis';
-$description = isset($description) ? $description : 'Subdomain dan inbox email gratis buat ngetes aplikasi localhost';
+$description = isset($description) ? $description : 'Buat ngetes yang perlu dan bisa dites';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -41,7 +41,7 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
             <b>ngetes.com</b>
           </h1>
           <h2 class="subtitle">
-            subdomain dan inbox email gratis buat <i>ngetes</i>
+            buat ngetes yang perlu dan bisa dites di <i>ngetes.com</i>
           </h2>
         </a>
       </div>
@@ -52,6 +52,11 @@ $description = isset($description) ? $description : 'Subdomain dan inbox email g
         <li data-target="tentang" id="li-tentang" <?=$path == 'tentang' || $path == '' ? $active : '';?>>
             <a href="<?=url('/tentang')?>">
               <span>Tentang</span>
+            </a>
+        </li>
+        <li data-target="koneksi" id="li-koneksi" <?=$path == 'koneksi' ? $active : '';?>>
+            <a href="<?=url('/koneksi')?>">
+              <span>Koneksi</span>
             </a>
         </li>
         <li data-target="subdomain" id="li-subdomain" <?=$path == 'subdomain' ? $active : '';?>>
