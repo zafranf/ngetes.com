@@ -1,4 +1,5 @@
 <?php
+$config = config();
 $path = str_replace("?" . _server('QUERY_STRING'), "", _server('REQUEST_URI'));
 $path = trim($path, '/');
 $active = 'class="is-active"';

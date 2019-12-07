@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content has-text-grey has-text-centered">
         <small class="has-text-grey">
-          Template by <a href="//github.com/dansup/bulma-templates" target="_blank" class="has-text-grey-darker">dansup</a>.<br>
+          <!--Template by <a href="//github.com/dansup/bulma-templates" target="_blank" class="has-text-grey-darker">dansup</a>.<br>-->
           &copy; April 2019. Hak cipta dilindungi Yang Maha Kuasa.<br>
           Dibuat dengan <span id="hati2">❤-❤</span>.
         </small>

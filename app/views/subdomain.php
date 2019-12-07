@@ -1,7 +1,7 @@
 <?php
-$title = 'Atur virtualhost apache';
-$keywords = 'ngetes apache, aplikasi localhost pake apache, virtual host apache';
-$description = 'Ngatur virtualhost buat pake apache';
+$title = 'Subdomain gratis';
+$keywords = 'subdomain gratis, ngetes apache, ngetes nginx, aplikasi localhost pake apache, aplikasi localhost pake nginx, virtual host apache, virtual host nginx';
+$description = 'Ngatur virtualhost apache dan nginx buat pake subdomain gratis';
 include 'header.php';
 ?>
   <div class="tab-content">
@@ -9,7 +9,7 @@ include 'header.php';
       <div class="content">
 
         <h1>Subdomain</h1>
-        <p>Subdomain langsung ngarah ke localhost (127.0.0.1). Semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian lah. <!-- Soalnya subdomain-nya langsung ngarah ke folder.  -->Kalo gak ada, bisa diatur kayak gini:</p>
+        <p>Subdomain langsung ngarah ke localhost. Semua projek mesti ada folder <u>public</u> dan di dalemnya ada <u>index.php</u>-nya, kayak framework2 kekinian lah. <!-- Soalnya subdomain-nya langsung ngarah ke folder.  -->Kalo gak ada, bisa diatur kayak gini:</p>
         <p>misal sebelumnya kayak gini,</p>
         <pre>
           /gratis
