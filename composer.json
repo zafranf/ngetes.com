@@ -8,10 +8,12 @@
         "zafranf/fnfwcore": "^0.0"
     },
     "license": "MIT",
-    "authors": [{
-        "name": "zafranf",
-        "email": "zafran@fadilah.id"
-    }],
+    "authors": [
+        {
+            "name": "zafranf",
+            "email": "zafran@fadilah.id"
+        }
+    ],
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('configuration-example.php', 'configuration.php');\""
