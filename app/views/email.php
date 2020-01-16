@@ -49,7 +49,7 @@ include 'header.php';
         e.preventDefault();
       }
 
-      // localStorage.setItem("email_name", val);
+      /* localStorage.setItem("email_name", val); */
     });
 
     function checkEmail(el = null) {

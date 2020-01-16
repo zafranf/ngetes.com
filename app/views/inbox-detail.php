@@ -125,14 +125,14 @@ include 'header.php';
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
             clearTimeout(loading_time);
-            // Success!
+            /* Success! */
             let res = JSON.parse(request.responseText);
             console.log(res);
             let data = res.data;
             generateEmail(data);
           } else {
             clearTimeout(loading_time);
-            // We reached our target server, but it returned an error
+            /* We reached our target server, but it returned an error */
             let load = document.getElementById('content');
             load.innerHTML = '<div style="text-align:center;">Yah, gak ada emailnya 🙁</div>';
           }
@@ -140,7 +140,7 @@ include 'header.php';
 
         request.onerror = function() {
           clearTimeout(loading_time);
-          // There was a connection error of some sort
+          /* There was a connection error of some sort */
           let load = document.getElementById('content');
           load.innerHTML = '<div style="text-align:center;">Waduh, herror 😱</div>';
         };
