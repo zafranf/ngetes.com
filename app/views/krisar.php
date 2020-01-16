@@ -65,7 +65,7 @@ include 'header.php';
               <button type="reset" class="button is-text">Gak jadi</button>
             </div>
           </div>
-          <div class="g-recaptcha" data-sitekey="<?=config('recaptcha')['site_key']?>" data-callback="onSubmit" data-size="invisible">
+          <div class="g-recaptcha" data-sitekey="<?=config('recaptcha')['site_key'] ?? ''?>" data-callback="onSubmit" data-size="invisible">
           </div>
         </form>
       </div>
