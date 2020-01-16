@@ -1,5 +1,5 @@
 <?php
-$title = 'Inboxnya ' . ($name ?? _session('email_name'));
+$title = 'Isi kotak surelnya ' . ($name ?? _session('email_name'));
 $follow = false;
 $keywords = 'ngetes email, ngetes email masuk, ngetes kirim email gratis, buka email di ngetes.com';
 $description = 'Daftar email ' . ($name ?? _session('email_name')) . ' di kotak masuk ngetes.com';
@@ -56,22 +56,29 @@ include 'header.php';
     <div class="tab-pane is-active" id="email">
       <div class="content">
         <?php generateFlashMessages();?>
-        <form id="form-email" action="<?=url('/inbox-open')?>" method="post">
-          <div class="field has-addons">
-            <!-- Inbox:&nbsp; -->
-            <p class="control">
-              <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=($name ?? _session('email_name'))?>">
-            </p>
-            <p class="control">
-              <a class="button is-static">
-                @ngetes.com
-              </a>
-            </p>
-            <p class="control">
-              <button class="button" id="btn-go">✓</button>
-            </p>
+        <div class="columns">
+          <div class="column">
+            <h2>Isi kotak surelnya</h2>
           </div>
-        </form>
+          <div class="column">
+            <form id="form-email" action="<?=url('/inbox-open')?>" method="post">
+              <div class="field has-addons">
+                <!-- Inbox:&nbsp; -->
+                <p class="control">
+                  <input id="input-name" class="input" type="text" name="email_name" placeholder="nama" value="<?=($name ?? _session('email_name'))?>">
+                </p>
+                <p class="control">
+                  <a class="button is-static">
+                    @ngetes.com
+                  </a>
+                </p>
+                <p class="control">
+                  <button class="button" id="btn-go">✓</button>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
         <div id="table-wrapper">
           <table id="table-email" class="table is-bordered is-narrow is-hoverable is-fullwidth">
             <thead>
