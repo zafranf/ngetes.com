@@ -49,9 +49,9 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
 
     <div class="tabs is-boxed is-centered main-menu" id="nav">
       <ul>
-        <li data-target="tentang" id="li-tentang" <?=$path == 'tentang' || $path == '' ? $active : '';?>>
-            <a href="<?=url('/tentang')?>">
-              <span>Tentang</span>
+        <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false || $path == '' ? $active : '';?>>
+            <a href="<?=url('/email')?>">
+              <span>Surel</span>
             </a>
         </li>
         <li data-target="subdomain" id="li-subdomain" <?=$path == 'subdomain' ? $active : '';?>>
@@ -69,11 +69,6 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
               <span>Nginx</span>
             </a>
         </li> -->
-        <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
-            <a href="<?=url('/email')?>">
-              <span>Surel</span>
-            </a>
-        </li>
         <li data-target="koneksi" id="li-koneksi" <?=$path == 'koneksi' ? $active : '';?>>
             <a href="<?=url('/koneksi')?>">
               <span>Koneksi</span>
@@ -82,6 +77,11 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
         <li data-target="krisar" id="li-krisar" <?=$path == 'krisar' ? $active : '';?>>
             <a href="<?=url('/krisar')?>">
               <span>Krisar</span>
+            </a>
+        </li>
+        <li data-target="tentang" id="li-tentang" <?=$path == 'tentang' ? $active : '';?>>
+            <a href="<?=url('/tentang')?>">
+              <span>Tentang</span>
             </a>
         </li>
         <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?> class="is-hidden">
