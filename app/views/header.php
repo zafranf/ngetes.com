@@ -30,6 +30,9 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,500,600,700,900" rel="stylesheet">
   <?=load_css('/css/bulma.min.css')?>
   <?=load_css('/css/tabs.css')?>
+  <?php if (config('adsense')['status']) {?>
+  <script data-ad-client="<?=config('adsense')['code']?>" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <?php }?>
 </head>
 
 <body>
