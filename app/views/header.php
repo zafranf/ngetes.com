@@ -71,7 +71,7 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
         </li> -->
         <li data-target="email" id="li-email" <?=$path == 'email' || strpos($path, 'inbox') !== false ? $active : '';?>>
             <a href="<?=url('/email')?>">
-              <span>Email</span>
+              <span>Surel</span>
             </a>
         </li>
         <li data-target="koneksi" id="li-koneksi" <?=$path == 'koneksi' ? $active : '';?>>

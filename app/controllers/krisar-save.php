@@ -13,8 +13,8 @@ $valid = validation([
         'name' => 'required|max:50',
         'email' => 'required|email|max:100',
         'message' => 'required|min:15|max:1000',
-        'phone' => 'numeric|max:15',
-        'website' => 'url',
+        'phone' => 'nullable|numeric|max:15',
+        'website' => 'nullable|url',
         'g-recaptcha-response' => 'required',
     ],
 ]);
