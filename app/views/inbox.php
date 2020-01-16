@@ -61,7 +61,7 @@ include 'header.php';
             <h2>Isi kotak surelnya</h2>
           </div>
           <div class="column">
-            <form id="form-email" action="<?=url('/inbox-open')?>" method="post">
+            <form id="form-email" action="<?=url('/inbox-open')?>" method="post" style="float:right;">
               <div class="field has-addons">
                 <!-- Inbox:&nbsp; -->
                 <p class="control">
