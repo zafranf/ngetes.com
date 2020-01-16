@@ -142,7 +142,7 @@ include 'header.php';
         }
       } */
 
-      // localStorage.setItem("email_name", val);
+      /* localStorage.setItem("email_name", val); */
     });
 
     function checkEmail(el = null) {

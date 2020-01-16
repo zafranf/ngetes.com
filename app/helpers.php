@@ -82,7 +82,7 @@ if (!function_exists('getImapAttachments')) {
     }
 }
 
-if (!function_exists('getImapAttachments')) {
+if (!function_exists('mdsort')) {
     function mdsort($array, $key, $sort = 'asc')
     {
         $data = usort($array, function ($a, $b) use ($key, $sort) {
