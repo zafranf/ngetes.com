@@ -3,8 +3,10 @@ if (_server('REQUEST_METHOD') != 'POST') {
     return view_error(404);
 }
 
-$parse = parse_url(_post('website'));
-$_POST['website'] = isset($parse['scheme']) ? _post('website') : 'http://' . _post('website');
+if (_post('website')) {
+    $parse = parse_url(_post('website'));
+    $_POST['website'] = isset($parse['scheme']) ? _post('website') : 'http://' . _post('website');
+}
 activityLog('submit krisar');
 
 $valid = validation([
@@ -13,8 +15,8 @@ $valid = validation([
         'name' => 'required|max:50',
         'email' => 'required|email|max:100',
         'message' => 'required|min:15|max:1000',
-        'phone' => 'nullable|numeric|max:15',
-        'website' => 'nullable|url',
+        'phone' => 'numeric|max:15',
+        'website' => 'url',
         'g-recaptcha-response' => 'required',
     ],
 ]);
