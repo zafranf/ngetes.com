@@ -215,9 +215,9 @@ include 'header.php';
 
         request.onload = function() {
           let res = JSON.parse(request.responseText);
-          // console.log(res);
+          /*  console.log(res); */
           if (request.status >= 200 && request.status < 400) {
-            // Success!
+            /* Success! */
             let data = res.data;
             if (data.length > 0) {
               generateEmails(data);
@@ -230,7 +230,7 @@ include 'header.php';
               fetchEmails();
             }, 1000 * 60);
           } else {
-            // We reached our target server, but it returned an error
+            /* We reached our target server, but it returned an error */
             loading(false);
             let tbody = document.getElementsByTagName('tbody')[0];
             let html = '<tr>'+
@@ -247,7 +247,7 @@ include 'header.php';
         };
 
         request.onerror = function(err) {
-          // There was a connection error of some sort
+          /* There was a connection error of some sort */
           loading(false);
           setTimeout(function() {
             fetchEmails();
