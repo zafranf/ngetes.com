@@ -1,5 +1,5 @@
 <?php
 return response([
     'status' => true,
-    'message' => 'Fetching data success!',
+    'message' => 'Get data success!',
 ], 200, true);
