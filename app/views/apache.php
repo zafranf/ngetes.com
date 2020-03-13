@@ -12,7 +12,7 @@ include 'header.php';
           <pre>
             &lt;VirtualHost *:80&gt;
               <?=spaces()?>ServerAlias *.ngetes.com
-              <?=spaces()?>DocumentRoot /folder/root/projek/%1/public
+              <?=spaces()?>VirtualDocumentRoot /folder/root/projek/%1/public
             &lt;/VirtualHost&gt;
           </pre>
         </p>
