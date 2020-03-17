@@ -88,7 +88,7 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
             </a>
         </li>
         <li data-target="bantu-tes" id="li-bantu-tes" <?=$path == 'bantu-tes' ? $active : '';?> class="is-hidden">
-            <a href="<?=url('/bantu-tes')?>" rel="nofollow">
+            <a href="<?=url('/bantu-tes')?>" rel="noindex,nofollow">
               <span>Bantu ngetes?</span>
             </a>
         </li>
