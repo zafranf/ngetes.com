@@ -10,12 +10,7 @@
 <url>
   <loc>http://ngetes.com/subdomain</loc>
   <lastmod>2020-03-17T07:40:36+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://ngetes.com/koneksi</loc>
-  <lastmod>2020-03-17T07:40:36+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.90</priority>
 </url>
 <url>
   <loc>http://ngetes.com/email</loc>
@@ -23,9 +18,14 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>http://ngetes.com/koneksi</loc>
+  <lastmod>2020-03-17T07:40:36+00:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
   <loc>http://ngetes.com/krisar</loc>
   <lastmod>2020-03-17T07:40:36+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.60</priority>
 </url>
 
 
