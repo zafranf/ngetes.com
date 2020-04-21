@@ -3,6 +3,7 @@ if (!function_exists('agent')) {
     function agent()
     {
         $agent = new \Jenssegers\Agent\Agent();
+        $device = null;
         if ($agent->isPhone()) {
             $device = 'phone';
         } else if ($agent->isTablet()) {
@@ -11,7 +12,7 @@ if (!function_exists('agent')) {
             $device = 'desktop';
         }
 
-        return $agent;
+        return $device;
     }
 }
 
