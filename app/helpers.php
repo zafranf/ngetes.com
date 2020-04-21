@@ -1,4 +1,19 @@
 <?php
+if (!function_exists('agent')) {
+    function agent()
+    {
+        $agent = new \Jenssegers\Agent\Agent();
+        if ($agent->isPhone()) {
+            $device = 'phone';
+        } else if ($agent->isTablet()) {
+            $device = 'tablet';
+        } else if ($agent->isDesktop()) {
+            $device = 'desktop';
+        }
+
+        return $agent;
+    }
+}
 
 if (!function_exists('generateFlashMessages')) {
     function generateFlashMessages()
