@@ -19,6 +19,7 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
   <meta name="robots" content="<?=$robots?>">
   <meta name="keywords" content="<?=$keywords?>">
   <meta name="description" content="<?=$description?>">
+  <meta name="propeller" content="6eb1d61aef9857535983993bed2339e7">
   <meta property="og:title" content="<?=$title?> | <?=config('app')['name']?>">
   <meta property="og:description" content="<?=$description?>">
   <meta property="og:type" content="website">
