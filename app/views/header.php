@@ -31,7 +31,7 @@ $description = isset($description) ? $description : 'Buat ngetes yang bisa dites
   <?=load_css('/css/bulma.min.css')?>
   <?=load_css('/css/tabs.css')?>
   <?php if (isset(config('adsense')['status']) && config('adsense')['status']) {?>
-  <script data-ad-client="<?=config('adsense')['code']?>" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- <script data-ad-client="<?=config('adsense')['code']?>" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
   <?php }?>
 </head>
 
