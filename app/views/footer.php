@@ -13,10 +13,20 @@
             <br>
             <script type="text/javascript" src="//uprimp.com/bnr.php?section=General&pub=521431&format=728x90&ga=g&bg=1"></script>
             <noscript><a href="https://yllix.com/publishers/521431" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub/728x90.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+            <style>
+              footer iframe {
+                height: 90px !important;
+              }
+            </style>
           <?php } else {?>
             <br>
             <script type="text/javascript" data-cfasync="false" src="//uprimp.com/bnr.php?section=General&pub=521431&format=300x50&ga=g&bg=1"></script>
             <noscript><a href="https://yllix.com/publishers/521431" target="_blank"><img src="//ylx-aff.advertica-cdn.com/pub_2hpya3.png" style="border:none;margin:0;padding:0;vertical-align:baseline;" alt="ylliX - Online Advertising Network" /></a></noscript>
+            <style>
+              footer iframe {
+                height: 50px !important;
+              }
+            </style>
           <?php }?>
         <?php }?>
       </div>
