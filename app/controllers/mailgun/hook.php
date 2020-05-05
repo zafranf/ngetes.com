@@ -47,6 +47,9 @@ $content = str_replace(['<body>', '</body>'], "", $content);
 /* check flag */
 $is_plain = empty($r['body-plain']) && !empty($content);
 $is_spam = isset($r['X-Mailgun-SFlag']) && bool($r['X-Mailgun-SFlag']) ? 1 : 0;
+if (!$is_spam) {
+    $is_spam = strpos("\"X-Mailgun-Sflag\", \"yes\"") !== false ? 1 : 0;
+}
 
 $data = [
     // 'id' => $mail->id,
