@@ -10,6 +10,7 @@ if (config('app')['debug']) {
             'method' => $_SERVER['REQUEST_METHOD'],
             'uri' => $_SERVER['REQUEST_URI'],
             'body' => file_get_contents('php://input'),
+            'request' => $_REQUEST,
             'GET' => $_GET,
             'POST' => $_POST,
             'FILES' => $_FILES,
@@ -17,6 +18,7 @@ if (config('app')['debug']) {
             '_input' => _input(),
             '_post' => _post(),
             '_get' => _get(),
+            '_files' => _files(),
         ],
     ];
 
