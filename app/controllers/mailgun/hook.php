@@ -10,6 +10,7 @@ if (config('app')['debug']) {
             'get' => _get(),
             'post' => _post(),
             'files' => _files(),
+            'input' => _input(),
         ],
     ];
 
