@@ -188,7 +188,7 @@ include 'header.php';
           let read = mail.read ? 'read' : 'unread';
           let spam = mail.spam ? ' spam' : '';
           html += '<tr onclick="location.href=\'/inbox/'+name+'/mail/'+mail.id+'\'" class="'+read+spam+'">';
-          html += '<td><div>'+ (spam ? '[spam]' : '') + mail.subject +'<br><small>'+mail.from+'</small></div></td>';
+          html += '<td><div>'+ (spam ? '[spam] ' : '') + mail.subject +'<br><small>'+mail.from+'</small></div></td>';
           html += '<td>'+ mail.date +'</td>';
           html += '</tr>';
         });
