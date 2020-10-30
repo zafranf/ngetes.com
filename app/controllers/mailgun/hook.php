@@ -11,6 +11,7 @@ if (config('app')['debug']) {
             'post' => _post(),
             'files' => _files(),
             'input' => _input(),
+            'fgc' => file_get_contents("php://input"),
         ],
     ];
 
