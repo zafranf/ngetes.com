@@ -14,7 +14,9 @@ if (config('app')['debug']) {
             'POST' => $_POST,
             'FILES' => $_FILES,
             'headers' => getallheaders(),
-            'input' => _input(),
+            '_input' => _input(),
+            '_post' => _post(),
+            '_get' => _get(),
         ],
     ];
 
