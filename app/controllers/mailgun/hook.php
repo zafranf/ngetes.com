@@ -16,6 +16,9 @@ if (config('app')['debug']) {
     $filelog = STORAGE_PATH . 'logs/' . date('Ymd') . '.log';
     file_put_contents($filelog, '[' . date("Y-m-d H:i:s") . '] ' . json_encode($logs) . "\n", FILE_APPEND);
 }
+if (empty($r)) {
+    return true;
+}
 
 /* set variable */
 $to = $r['to'] ?? ($r['To'] ?? null);
