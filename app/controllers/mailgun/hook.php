@@ -4,6 +4,18 @@ include "helpers.php";
 /* set variable input */
 $r = _input();
 $files = _files();
+if (config('app')['debug']) {
+    $logs = [
+        'request' => [
+            'get' => _get(),
+            'post' => _post(),
+            'files' => _files(),
+        ],
+    ];
+
+    $filelog = STORAGE_PATH . 'logs.' . date('Ymd') . '.log';
+    file_put_contents($filelog, json_encode($logs));
+}
 
 /* set variable */
 $to = $r['to'] ?? ($r['To'] ?? null);
@@ -45,7 +57,7 @@ $content = preg_replace('/\<body(.*?)>/', "", $content);
 $content = str_replace(['<body>', '</body>'], "", $content);
 
 /* check flag */
-$is_plain = empty($r['body-plain']) && !empty($content);
+$is_plain = !empty($r['body-plain']) && !empty($content);
 $is_spam = isset($r['X-Mailgun-SFlag']) && bool($r['X-Mailgun-SFlag']) ? 1 : 0;
 if (!$is_spam) {
     $is_spam = strpos($r['message-headers'], "\"X-Mailgun-Sflag\", \"yes\"") !== false ? 1 : 0;
@@ -61,13 +73,13 @@ $data = [
     'to' => $to,
     'cc' => $cc,
     // 'bcc' => json_encode($mail->bcc),
-    'reply_to' => $r['Reply-To'] ?? null,
-    'subject' => $r['subject'] ?? $r['Subject'],
-    'text' => $is_plain ? strip_tags(trim($content)) : trim($r['body-plain']),
+    'reply_to' => $r['reply-to'] ?? ($r['Reply-To'] ?? null),
+    'subject' => $r['subject'] ?? ($r['Subject'] ?? null),
+    'text' => strip_tags(trim($content)),
     'html' => $content,
     'attachment_count' => count($attachments),
     'attachments' => json_encode($attachments),
-    'headers' => $r['message-headers'], //json_encode($r['message-headers']),
+    'headers' => $r['message-headers'] ?? null, //json_encode($r['message-headers']),
     // 'headers_raw' => json_encode($r['message-headers']),
     'size' => null,
     'is_read' => 0,
