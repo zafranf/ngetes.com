@@ -6,9 +6,9 @@ $r = _input();
 $files = _files();
 
 /* set variable */
-$to = $r['To'];
+$to = $r['to'] ?? ($r['To'] ?? null);
 $cc = $r['Cc'] ?? null;
-$from = $r['from'] ?? $r['From'];
+$from = $r['from'] ?? ($r['From'] ?? null);
 $from = parseFrom($from);
 $attachments = isset($r['attachment-count']) && $r['attachment-count'] > 0 ? processFiles(_files()) : [];
 
