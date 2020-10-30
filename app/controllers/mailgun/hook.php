@@ -7,11 +7,13 @@ $files = _files();
 if (config('app')['debug']) {
     $logs = [
         'request' => [
-            'get' => _get(),
-            'post' => _post(),
-            'files' => _files(),
-            'input' => _input(),
-            'fgc' => file_get_contents("php://input"),
+            'method' => $_SERVER['REQUEST_METHOD'],
+            'uri' => $_SERVER['REQUEST_URI'],
+            'body' => file_get_contents('php://input'),
+            'GET' => $_GET,
+            'POST' => $_POST,
+            'FILES' => $_FILES,
+            'headers' => getallheaders(),
         ],
     ];
 
