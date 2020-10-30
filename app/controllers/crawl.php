@@ -64,7 +64,7 @@ array_splice($ids, config('imap')['limit']);
 $mails = $mailbox->getMailsInfo($ids);
 $mailbox->disconnect(); */
 
-$mails = db()->table('emails')->where('to', 'like', '%' . _post('name') . '@ngetes.com%')->where('is_deleted', 0) /* ->where('is_spam', 0) */->get();
+$mails = db()->table('emails')->where('to', 'like', '%' . _post('name') . '@ngetes.com%')->where('is_deleted', 0)->where('is_spam', 0)->get();
 foreach ($mails as $mail) {
     $from = $mail->from_name . ' <' . $mail->from_email . '>';
     $data[] = [
