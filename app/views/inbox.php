@@ -44,6 +44,7 @@ include 'header.php';
       border-left: 2px solid #ff3860;
     }
     #table-email tr.read {
+      padding: 0;
       font-weight: 300;
     }
     @media screen and (min-width: 769px) {
