@@ -13,7 +13,7 @@ if (config('app')['debug']) {
         ],
     ];
 
-    $filelog = STORAGE_PATH . 'logs.' . date('Ymd') . '.log';
+    $filelog = STORAGE_PATH . 'logs/' . date('Ymd') . '.log';
     file_put_contents($filelog, json_encode($logs));
 }
 
