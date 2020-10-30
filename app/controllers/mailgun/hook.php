@@ -14,7 +14,7 @@ if (config('app')['debug']) {
     ];
 
     $filelog = STORAGE_PATH . 'logs/' . date('Ymd') . '.log';
-    file_put_contents($filelog, json_encode($logs));
+    file_put_contents($filelog, '[' . date("Y-m-d H:i:s") . '] ' . json_encode($logs) . "\n", FILE_APPEND);
 }
 
 /* set variable */
@@ -25,7 +25,7 @@ $from = parseFrom($from);
 $attachments = isset($r['attachment-count']) && $r['attachment-count'] > 0 ? processFiles(_files()) : [];
 
 /* set content */
-$content = $r['body-html'] ?? nl2br(trim($r['body-plain']));
+$content = $r['body-html'] ?? nl2br(trim(($r['body-plain'] ?? null)));
 $content = trim($content);
 
 /* convert inline styles */
