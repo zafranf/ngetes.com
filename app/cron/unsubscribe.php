@@ -23,9 +23,11 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
             $q->where('html', 'like', '%unsubscribe%')
                 ->orWhere('html', 'like', '%langganan%')
                 ->orWhere('html', 'like', '%henti%langgan%');
-        })
-        ->whereNotIn('id', $mail_ids)
-        ->where('created_at', '<=', $date)
+        });
+    if (!empty($mail_ids)) {
+        $mails = $mails->whereNotIn('id', $mail_ids);
+    }
+    $mails = $mails->where('created_at', '<=', $date)
         ->orderBy('created_at', 'desc')
         ->limit($perpage)
         ->offset($offset)
