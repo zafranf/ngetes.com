@@ -11,11 +11,11 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
     $urls = array_merge($urls, []);
 
     /* get all unsubscribed emails */
-    /* $unsubs = db()->table('unsubs')->get();
+    $unsubs = db()->table('unsubs')->get();
     foreach ($unsubs as $unsub) {
         $mail_ids[] = $unsub->email_id;
         $urls[] = $unsub->url;
-    } */
+    }
 
     /* get the emails */
     $mails = db()->table('emails')
