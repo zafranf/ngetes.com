@@ -59,27 +59,31 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
                 /* cek url exists */ /* db based on link */
                 $exists = in_array($url, $urls); //db()->table('unsubs')->where('url', $url)->first();
                 if (!$exists) {
-                    /* do unsub */
-                    $client = new \GuzzleHttp\Client();
-                    $res = $client->request('GET', $url);
-                    if ($res->getStatusCode() == 200) {
-                        $unsub = 'SUCCESS';
+                    try {
+                        /* do unsub */
+                        $client = new \GuzzleHttp\Client();
+                        $res = $client->request('GET', $url);
+                        if ($res->getStatusCode() == 200) {
+                            $unsub = 'SUCCESS';
 
-                        /* input ke db, from to link */
-                        $from = $mail->from_email;
-                        $to = $mail->to;
-                        db()->table('unsubs')->insert([
-                            'from' => $from,
-                            'to' => $to,
-                            'url' => $url,
-                            'email_id' => $mail->id,
-                            'status' => 1
-                        ]);
+                            /* input ke db, from to link */
+                            $from = $mail->from_email;
+                            $to = $mail->to;
+                            db()->table('unsubs')->insert([
+                                'from' => $from,
+                                'to' => $to,
+                                'url' => $url,
+                                'email_id' => $mail->id,
+                                'status' => 1
+                            ]);
 
-                        /* attach to urls */
-                        $urls[] = $url;
-                        $mail_ids[] = $mail->id;
-                    } else {
+                            /* attach to urls */
+                            $urls[] = $url;
+                            $mail_ids[] = $mail->id;
+                        } else {
+                            $unsub = 'Failed!';
+                        }
+                    } catch (\Exception $e) {
                         $unsub = 'Failed!';
                     }
                 }
