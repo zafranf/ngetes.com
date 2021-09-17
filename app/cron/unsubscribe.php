@@ -2,12 +2,12 @@
 /* Define Application Path */
 require_once dirname(__DIR__) . '/../public/index.php';
 
-function doUnsub($date = 'now', $page = 1, $urls = [])
+function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
 {
     $perpage = 10;
     $offset = ($page - 1) * $perpage;
 
-    $mail_ids = [];
+    $mail_ids = array_merge($mail_ids, []);
     $urls = array_merge($urls, []);
 
     /* get all unsubscribed emails */
@@ -24,6 +24,7 @@ function doUnsub($date = 'now', $page = 1, $urls = [])
                 ->orWhere('html', 'like', '%langganan%')
                 ->orWhere('html', 'like', '%henti%langgan%');
         })
+        ->whereNotIn('id', $mail_ids)
         ->where('created_at', '<=', $date)
         ->orderBy('created_at', 'desc')
         ->limit($perpage)
@@ -75,6 +76,7 @@ function doUnsub($date = 'now', $page = 1, $urls = [])
 
                         /* attach to urls */
                         $urls[] = $url;
+                        $mail_ids[] = $mail->id;
                     } else {
                         $unsub = 'Failed!';
                     }
