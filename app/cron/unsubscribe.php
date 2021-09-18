@@ -67,7 +67,9 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
                                 'to' => $to,
                                 'url' => $url,
                                 'email_id' => $mail->id,
-                                'status' => 1
+                                'status' => 1,
+                                'updated_at' => date('Y-m-d H:i:s'),
+                                'created_at' => date('Y-m-d H:i:s'),
                             ]);
 
                             /* attach to urls */
