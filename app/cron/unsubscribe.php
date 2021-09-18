@@ -84,7 +84,7 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
                             $unsub = 'Failed!';
                         }
                     } catch (\Exception $e) {
-                        $unsub = 'Failed!';
+                        $unsub = 'Failed! | ' . $e->getMessage();
                     }
                 }
                 echo "     unsub: " . $unsub . "\n";
