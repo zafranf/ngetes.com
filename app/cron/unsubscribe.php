@@ -4,7 +4,8 @@ require_once dirname(__DIR__) . '/../public/index.php';
 
 function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [], $last_id = null)
 {
-    $perpage = 10;
+    echo 'Page: ' . $page . "\n";
+    $perpage = 20;
     $offset = ($page - 1) * $perpage;
 
     $mail_ids = array_merge($mail_ids, []);
