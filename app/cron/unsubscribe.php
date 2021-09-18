@@ -88,7 +88,7 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
         }
     }
 
-    doUnsub($date, $page + 1);
+    doUnsub($date, $page + 1, $urls, $mail_ids);
 }
 
 
