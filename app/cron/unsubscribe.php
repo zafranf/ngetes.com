@@ -2,7 +2,7 @@
 /* Define Application Path */
 require_once dirname(__DIR__) . '/../public/index.php';
 
-function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
+function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [], $last_id = null)
 {
     $perpage = 10;
     $offset = ($page - 1) * $perpage;
@@ -19,6 +19,9 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
         });
     if (!empty($mail_ids)) {
         $mails = $mails->whereNotIn('id', $mail_ids);
+    }
+    if (!is_null($last_id)) {
+        $mails = $mails->where('id', '>', $last_id);
     }
     $mails = $mails->where('created_at', '<=', $date)
         ->orderBy('created_at', 'asc')
@@ -88,6 +91,8 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
                 echo "========================================" . "\n";
             }
         }
+
+        $last_id = $mail->id;
     }
 
     doUnsub($date, $page + 1, $urls, $mail_ids);
