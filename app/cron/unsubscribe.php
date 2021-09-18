@@ -10,13 +10,6 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
     $mail_ids = array_merge($mail_ids, []);
     $urls = array_merge($urls, []);
 
-    /* get all unsubscribed emails */
-    $unsubs = db()->table('unsubs')->get();
-    foreach ($unsubs as $unsub) {
-        $mail_ids[] = $unsub->email_id;
-        $urls[] = $unsub->url;
-    }
-
     /* get the emails */
     $mails = db()->table('emails')
         ->where(function ($q) {
@@ -96,5 +89,16 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
     doUnsub($date, $page + 1);
 }
 
+
+/* get all unsubscribed emails */
+$urls = [];
+$mail_ids = [];
+$unsubs = db()->table('unsubs')->get();
+foreach ($unsubs as $unsub) {
+    $mail_ids[] = $unsub->email_id;
+    $urls[] = $unsub->url;
+}
+
+/* do it */
 $date = date('Y-m-d H:i:s', strtotime('-7 days'));
-doUnsub($date);
+doUnsub($date, 1, $urls, $mail_ids);
