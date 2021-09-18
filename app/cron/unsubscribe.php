@@ -103,12 +103,16 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [], $last_id 
 /* get all unsubscribed emails */
 $urls = [];
 $mail_ids = [];
-$unsubs = db()->table('unsubs')->get();
+/* $unsubs = db()->table('unsubs')->get();
 foreach ($unsubs as $unsub) {
     $mail_ids[] = $unsub->email_id;
     $urls[] = $unsub->url;
-}
+} */
+
+/* get latest id */
+$unsubs = db()->table('unsubs')->orderBy('id', 'desc')->first();
+$last_id = $unsubs->email_id;
 
 /* do it */
 $date = date('Y-m-d H:i:s', strtotime('-7 days'));
-doUnsub($date, 1, $urls, $mail_ids);
+doUnsub($date, 1, $urls, $mail_ids, $last_id);
