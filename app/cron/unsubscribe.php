@@ -55,7 +55,9 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
                     try {
                         /* do unsub */
                         $client = new \GuzzleHttp\Client();
-                        $res = $client->request('GET', $url);
+                        $res = $client->request('GET', $url, [
+                            'connect_timeout' => 5
+                        ]);
                         if ($res->getStatusCode() == 200) {
                             $unsub = 'SUCCESS';
 
