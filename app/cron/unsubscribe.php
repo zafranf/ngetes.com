@@ -116,7 +116,7 @@ foreach ($unsubs as $unsub) {
 } */
 
 /* get latest id */
-$unsubs = db()->table('unsubs')->orderBy('id', 'desc')->first();
+$unsubs = db()->table('unsubs')->orderBy('email_id', 'desc')->first();
 $last_id = $unsubs->email_id;
 
 /* do it */
