@@ -21,7 +21,7 @@ function doUnsub($date = 'now', $page = 1, $urls = [], $mail_ids = [])
         $mails = $mails->whereNotIn('id', $mail_ids);
     }
     $mails = $mails->where('created_at', '<=', $date)
-        ->orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'asc')
         ->limit($perpage)
         ->offset($offset)
         ->get();
